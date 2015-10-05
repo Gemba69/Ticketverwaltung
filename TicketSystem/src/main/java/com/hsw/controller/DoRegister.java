@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.hsw.controller.dbSession.EntityManagerUtil;
+import com.hsw.model.User;
+
 /**
  * Servlet implementation class DoRegister
  */
@@ -26,8 +29,20 @@ public class DoRegister extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String username = null;
+		String password = null;
+		String email = null;
+		
+		User newUser = new User();
+		newUser.setUsername(username);
+		newUser.setPasswort(password);
+		newUser.setEmail(email);
+		
+		EntityManagerUtil.persistInstance(newUser);
+		
+	    response.sendRedirect("login.jsp");
+		
 	}
 
 	/**

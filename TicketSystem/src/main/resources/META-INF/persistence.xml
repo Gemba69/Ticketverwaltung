@@ -5,6 +5,15 @@
 	<persistence-unit name="ticketsystem" transaction-type="JTA">
 	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 	<jta-data-source>java:comp/env/jdbc/ticketverwaltung</jta-data-source>
+		<class>com.hsw.model.Comment</class>
+		<class>com.hsw.model.Project</class>
+		<class>com.hsw.model.Right</class>
+		<class>com.hsw.model.Role</class>
+		<class>com.hsw.model.RoleRight</class>
+		<class>com.hsw.model.StatusTyp</class>
+		<class>com.hsw.model.Tag</class>
+		<class>com.hsw.model.Ticket</class>
+		<class>com.hsw.model.TicketTag</class>
 		<class>com.hsw.model.User</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />

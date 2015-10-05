@@ -9,6 +9,7 @@ public class EntityManagerUtil {
 	public static boolean persistInstance(Object entity) {
 		
 		EntityManager em = EntityManagerFactoryUtil.createEntityManager();
+		
 		em.getTransaction().begin();
 		em.persist(entity);
 		em.getTransaction().commit();

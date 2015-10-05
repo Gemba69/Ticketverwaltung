@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 30.09.2015 14:41:58 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="com.hsw.testmodel.Comment" table="Comment" catalog="ticketverwaltung">
+        <id name="commentId" type="java.lang.Integer">
+            <column name="Comment_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="comment" type="string">
+            <column name="Comment" length="400" not-null="true" />
+        </property>
+        <property name="commentIssuer" type="string">
+            <column name="Comment_Issuer" length="40" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

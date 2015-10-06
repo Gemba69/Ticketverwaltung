@@ -49,33 +49,13 @@ CREATE TABLE IF NOT EXISTS `Project` (
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `Right`
---
-
-CREATE TABLE IF NOT EXISTS `Right` (
-`Right_ID` int(10) NOT NULL,
-  `Right_Name` varchar(30) NOT NULL,
-  `Right_Desc` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Tabellenstruktur für Tabelle `Role`
 --
 
 CREATE TABLE IF NOT EXISTS `Role` (
-`Role_ID` int(10) NOT NULL,
   `Role_Name` varchar(30) NOT NULL,
   `Role_Desc` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Daten für Tabelle `Role`
---
-
-INSERT INTO `Role` (`Role_ID`, `Role_Name`, `Role_Desc`) VALUES
-(1, 'User', NULL);
 
 -- --------------------------------------------------------
 
@@ -83,9 +63,9 @@ INSERT INTO `Role` (`Role_ID`, `Role_Name`, `Role_Desc`) VALUES
 -- Tabellenstruktur für Tabelle `Role_Right`
 --
 
-CREATE TABLE IF NOT EXISTS `Role_Right` (
-  `Right_ID` int(10) NOT NULL,
-  `Role_ID` int(10) NOT NULL
+CREATE TABLE IF NOT EXISTS `User_Role` (
+  `Username` varchar(30) NOT NULL,
+  `Role_Name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -161,8 +141,7 @@ CREATE TABLE IF NOT EXISTS `User` (
   `Passwort` varchar(256) NOT NULL,
   `Email` varchar(40) NOT NULL,
   `Vorname` varchar(30) NOT NULL,
-  `Nachname` varchar(30) NOT NULL,
-  `Role_ID` int(10) NOT NULL
+  `Nachname` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -182,22 +161,16 @@ ALTER TABLE `Project`
  ADD PRIMARY KEY (`Project_ID`), ADD KEY `FK_Project_1` (`Project_Owner`);
 
 --
--- Indizes für die Tabelle `Right`
---
-ALTER TABLE `Right`
- ADD PRIMARY KEY (`Right_ID`);
-
---
 -- Indizes für die Tabelle `Role`
 --
 ALTER TABLE `Role`
- ADD PRIMARY KEY (`Role_ID`);
+ ADD PRIMARY KEY (`Role_Name`);
 
 --
--- Indizes für die Tabelle `Role_Right`
+-- Indizes für die Tabelle `User_Role`
 --
-ALTER TABLE `Role_Right`
- ADD PRIMARY KEY (`Right_ID`,`Role_ID`), ADD KEY `FK_Role_Right_2` (`Role_ID`);
+ALTER TABLE `User_Role`
+ ADD PRIMARY KEY (`Username`,`Role_Name`),ADD KEY `FK_User_Role_1` (`Username`),ADD KEY `FK_User_Role_2` (`Role_Name`);
 
 --
 -- Indizes für die Tabelle `Status_Typ`
@@ -233,7 +206,7 @@ ALTER TABLE `Ticket_Tag`
 -- Indizes für die Tabelle `User`
 --
 ALTER TABLE `User`
- ADD PRIMARY KEY (`Username`), ADD KEY `FK_User_1` (`Role_ID`);
+ ADD PRIMARY KEY (`Username`);
 
 --
 -- AUTO_INCREMENT für exportierte Tabellen
@@ -249,16 +222,6 @@ MODIFY `Comment_ID` int(10) NOT NULL AUTO_INCREMENT;
 --
 ALTER TABLE `Project`
 MODIFY `Project_ID` int(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT für Tabelle `Right`
---
-ALTER TABLE `Right`
-MODIFY `Right_ID` int(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT für Tabelle `Role`
---
-ALTER TABLE `Role`
-MODIFY `Role_ID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT für Tabelle `Status_Typ`
 --
@@ -291,11 +254,11 @@ ALTER TABLE `Project`
 ADD CONSTRAINT `FK_Project_1` FOREIGN KEY (`Project_Owner`) REFERENCES `User` (`Username`);
 
 --
--- Constraints der Tabelle `Role_Right`
+-- Constraints der Tabelle `User_Role`
 --
-ALTER TABLE `Role_Right`
-ADD CONSTRAINT `FK_Role_Right_1` FOREIGN KEY (`Right_ID`) REFERENCES `Right` (`Right_ID`),
-ADD CONSTRAINT `FK_Role_Right_2` FOREIGN KEY (`Role_ID`) REFERENCES `Role` (`Role_ID`);
+ALTER TABLE `User_Role`
+ADD CONSTRAINT `FK_User_Role_1` FOREIGN KEY (`Username`) REFERENCES `User` (`Username`),
+ADD CONSTRAINT `FK_User_Role_2` FOREIGN KEY (`Role_Name`) REFERENCES `Role` (`Role_Name`);
 
 --
 -- Constraints der Tabelle `Ticket`
@@ -320,15 +283,11 @@ ALTER TABLE `Ticket_Tag`
 ADD CONSTRAINT `FK_Ticket_Tag_1` FOREIGN KEY (`Tag_ID`) REFERENCES `Tag` (`Tag_ID`),
 ADD CONSTRAINT `FK_Ticket_Tag_2` FOREIGN KEY (`TicketID`) REFERENCES `Ticket` (`TicketID`);
 
---
--- Constraints der Tabelle `User`
---
-ALTER TABLE `User`
-ADD CONSTRAINT `FK_User_1` FOREIGN KEY (`Role_ID`) REFERENCES `Role` (`Role_ID`);
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
+
   
 GRANT ALL PRIVILEGES ON *.* TO 'ticket_user'@'localhost' IDENTIFIED BY PASSWORD '*01A6717B58FF5C7EAFFF6CB7C96F7428EA65FE4C' WITH GRANT OPTION;
+

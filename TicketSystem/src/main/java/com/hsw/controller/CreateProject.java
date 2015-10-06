@@ -15,7 +15,7 @@ import com.hsw.model.Ticket;
 /**
  * Servlet implementation class CreateTicket
  */
-@WebServlet("/CreateTicket")
+@WebServlet("/CreateProject")
 public class CreateProject extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

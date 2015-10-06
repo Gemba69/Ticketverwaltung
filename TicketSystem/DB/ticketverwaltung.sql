@@ -39,7 +39,6 @@ CREATE TABLE IF NOT EXISTS `Comment` (
 --
 
 CREATE TABLE IF NOT EXISTS `Project` (
-`Project_ID` int(10) NOT NULL,
   `Project_Name` varchar(30) DEFAULT NULL,
   `Project_Code` varchar(5) NOT NULL,
   `Project_Desc` varchar(80) DEFAULT NULL,
@@ -75,7 +74,6 @@ CREATE TABLE IF NOT EXISTS `User_Role` (
 --
 
 CREATE TABLE IF NOT EXISTS `Status_Typ` (
-`Status_ID` int(10) NOT NULL,
   `Status` varchar(30) NOT NULL,
   `Status_Desc` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -87,7 +85,6 @@ CREATE TABLE IF NOT EXISTS `Status_Typ` (
 --
 
 CREATE TABLE IF NOT EXISTS `Tag` (
-`Tag_ID` int(10) NOT NULL,
   `Tag_Name` varchar(30) NOT NULL,
   `Tag_Desc` varchar(80) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

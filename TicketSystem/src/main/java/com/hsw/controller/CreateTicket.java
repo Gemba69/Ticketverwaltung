@@ -30,21 +30,21 @@ public class CreateTicket extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String ticketName = "";
-		
-		//Project
-		//Ticket Issuer
-		//Author
-		//Beschreibung
-		//Status
-		
-		Ticket newTicket = new Ticket();
-		newTicket.setTicketName(ticketName);
-		
-		EntityManagerUtil.persistInstance(newTicket);
-		
-		
-		response.sendRedirect("");
+//		String ticketName = "";
+//		
+//		//Project
+//		//Ticket Issuer
+//		//Author
+//		//Beschreibung
+//		//Status
+//		
+//		Ticket newTicket = new Ticket();
+//		newTicket.setTicketName(ticketName);
+//		
+//		EntityManagerUtil.persistInstance(newTicket);
+//		
+//		
+//		//response.sendRedirect("");
 	}
 
 	/**

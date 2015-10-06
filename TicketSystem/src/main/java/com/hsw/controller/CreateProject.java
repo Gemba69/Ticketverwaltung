@@ -34,7 +34,6 @@ public class CreateProject extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int projectId = (int) request.getAttribute("projectId");
         String projectName = (String) request.getAttribute("projectName");
         String projectCode = (String) request.getAttribute("projectCode");
         String projectDesc = (String) request.getAttribute("projectDesc");
@@ -43,7 +42,6 @@ public class CreateProject extends HttpServlet {
 
         newProject.setProjectCode(projectCode);
         newProject.setProjectDesc(projectDesc);
-        newProject.setProjectId(projectId);
         newProject.setProjectName(projectName);
         newProject.setProjectOwner(projectOwner);
 

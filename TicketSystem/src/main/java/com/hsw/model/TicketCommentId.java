@@ -1,5 +1,5 @@
 package com.hsw.model;
-// Generated 06.10.2015 15:00:23 by Hibernate Tools 4.0.0
+// Generated 06.10.2015 23:10:36 by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -10,14 +10,34 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class TicketCommentId implements java.io.Serializable {
 
-	private int commentId;
+	private String projectCode;
 	private int ticketId;
+	private int commentId;
 
 	public TicketCommentId() {
 	}
 
-	public TicketCommentId(int commentId, int ticketId) {
+	public TicketCommentId(String projectCode, int ticketId, int commentId) {
+		this.projectCode = projectCode;
+		this.ticketId = ticketId;
 		this.commentId = commentId;
+	}
+
+	@Column(name = "Project_Code", nullable = false, length = 5)
+	public String getProjectCode() {
+		return this.projectCode;
+	}
+
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
+	}
+
+	@Column(name = "Ticket_ID", nullable = false)
+	public int getTicketId() {
+		return this.ticketId;
+	}
+
+	public void setTicketId(int ticketId) {
 		this.ticketId = ticketId;
 	}
 
@@ -30,15 +50,6 @@ public class TicketCommentId implements java.io.Serializable {
 		this.commentId = commentId;
 	}
 
-	@Column(name = "TicketID", nullable = false)
-	public int getTicketId() {
-		return this.ticketId;
-	}
-
-	public void setTicketId(int ticketId) {
-		this.ticketId = ticketId;
-	}
-
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -48,14 +59,17 @@ public class TicketCommentId implements java.io.Serializable {
 			return false;
 		TicketCommentId castOther = (TicketCommentId) other;
 
-		return (this.getCommentId() == castOther.getCommentId()) && (this.getTicketId() == castOther.getTicketId());
+		return ((this.getProjectCode() == castOther.getProjectCode()) || (this.getProjectCode() != null
+				&& castOther.getProjectCode() != null && this.getProjectCode().equals(castOther.getProjectCode())))
+				&& (this.getTicketId() == castOther.getTicketId()) && (this.getCommentId() == castOther.getCommentId());
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + this.getCommentId();
+		result = 37 * result + (getProjectCode() == null ? 0 : this.getProjectCode().hashCode());
 		result = 37 * result + this.getTicketId();
+		result = 37 * result + this.getCommentId();
 		return result;
 	}
 

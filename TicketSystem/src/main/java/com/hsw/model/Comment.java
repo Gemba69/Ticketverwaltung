@@ -1,5 +1,5 @@
 package com.hsw.model;
-// Generated 06.10.2015 15:00:23 by Hibernate Tools 4.0.0
+// Generated 06.10.2015 23:10:36 by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,7 +39,7 @@ public class Comment implements java.io.Serializable {
 		this.commentId = commentId;
 	}
 
-	@Column(name = "Comment", nullable = false, length = 400)
+	@Column(name = "Comment", nullable = false, length = 200)
 	public String getComment() {
 		return this.comment;
 	}

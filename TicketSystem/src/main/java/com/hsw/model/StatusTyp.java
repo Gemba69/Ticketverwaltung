@@ -1,10 +1,8 @@
 package com.hsw.model;
-// Generated 06.10.2015 15:00:23 by Hibernate Tools 4.0.0
+// Generated 06.10.2015 23:10:36 by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,7 +13,6 @@ import javax.persistence.Table;
 @Table(name = "Status_Typ", catalog = "ticketverwaltung")
 public class StatusTyp implements java.io.Serializable {
 
-	private Integer statusId;
 	private String status;
 	private String statusDesc;
 
@@ -32,18 +29,8 @@ public class StatusTyp implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "Status_ID", unique = true, nullable = false)
-	public Integer getStatusId() {
-		return this.statusId;
-	}
-
-	public void setStatusId(Integer statusId) {
-		this.statusId = statusId;
-	}
-
-	@Column(name = "Status", nullable = false, length = 30)
+	@Column(name = "Status", unique = true, nullable = false, length = 20)
 	public String getStatus() {
 		return this.status;
 	}
@@ -52,7 +39,7 @@ public class StatusTyp implements java.io.Serializable {
 		this.status = status;
 	}
 
-	@Column(name = "Status_Desc", length = 50)
+	@Column(name = "Status_Desc", length = 40)
 	public String getStatusDesc() {
 		return this.statusDesc;
 	}

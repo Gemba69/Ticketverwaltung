@@ -1,11 +1,11 @@
 package com.hsw.model;
-// Generated 06.10.2015 15:00:23 by Hibernate Tools 4.0.0
+// Generated 06.10.2015 23:10:36 by Hibernate Tools 4.0.0
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -15,45 +15,44 @@ import javax.persistence.Table;
 @Table(name = "Ticket", catalog = "ticketverwaltung")
 public class Ticket implements java.io.Serializable {
 
-	private Integer ticketId;
+	private TicketId id;
 	private String ticketName;
-	private String ticketDesc;
-	private int projectId;
 	private String ticketIssuer;
 	private String ticketAuthor;
-	private int ticketStatus;
+	private String ticketDesc;
+	private String ticketStatus;
 
 	public Ticket() {
 	}
 
-	public Ticket(String ticketName, int projectId, String ticketIssuer, String ticketAuthor, int ticketStatus) {
+	public Ticket(TicketId id, String ticketName, String ticketAuthor, String ticketStatus) {
+		this.id = id;
 		this.ticketName = ticketName;
-		this.projectId = projectId;
-		this.ticketIssuer = ticketIssuer;
 		this.ticketAuthor = ticketAuthor;
 		this.ticketStatus = ticketStatus;
 	}
 
-	public Ticket(String ticketName, String ticketDesc, int projectId, String ticketIssuer, String ticketAuthor,
-			int ticketStatus) {
+	public Ticket(TicketId id, String ticketName, String ticketIssuer, String ticketAuthor, String ticketDesc,
+			String ticketStatus) {
+		this.id = id;
 		this.ticketName = ticketName;
+		this.ticketIssuer = ticketIssuer;
+		this.ticketAuthor = ticketAuthor;
 		this.ticketDesc = ticketDesc;
-		this.projectId = projectId;
-		this.ticketIssuer = ticketIssuer;
-		this.ticketAuthor = ticketAuthor;
 		this.ticketStatus = ticketStatus;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@EmbeddedId
 
-	@Column(name = "TicketID", unique = true, nullable = false)
-	public Integer getTicketId() {
-		return this.ticketId;
+	@AttributeOverrides({
+			@AttributeOverride(name = "projectCode", column = @Column(name = "Project_Code", nullable = false, length = 5) ),
+			@AttributeOverride(name = "ticketId", column = @Column(name = "Ticket_ID", nullable = false) ) })
+	public TicketId getId() {
+		return this.id;
 	}
 
-	public void setTicketId(Integer ticketId) {
-		this.ticketId = ticketId;
+	public void setId(TicketId id) {
+		this.id = id;
 	}
 
 	@Column(name = "Ticket_Name", nullable = false, length = 40)
@@ -65,25 +64,7 @@ public class Ticket implements java.io.Serializable {
 		this.ticketName = ticketName;
 	}
 
-	@Column(name = "Ticket_Desc", length = 150)
-	public String getTicketDesc() {
-		return this.ticketDesc;
-	}
-
-	public void setTicketDesc(String ticketDesc) {
-		this.ticketDesc = ticketDesc;
-	}
-
-	@Column(name = "Project_ID", nullable = false)
-	public int getProjectId() {
-		return this.projectId;
-	}
-
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
-	}
-
-	@Column(name = "Ticket_Issuer", nullable = false, length = 40)
+	@Column(name = "Ticket_Issuer", length = 40)
 	public String getTicketIssuer() {
 		return this.ticketIssuer;
 	}
@@ -101,12 +82,21 @@ public class Ticket implements java.io.Serializable {
 		this.ticketAuthor = ticketAuthor;
 	}
 
-	@Column(name = "Ticket_Status", nullable = false)
-	public int getTicketStatus() {
+	@Column(name = "Ticket_Desc", length = 200)
+	public String getTicketDesc() {
+		return this.ticketDesc;
+	}
+
+	public void setTicketDesc(String ticketDesc) {
+		this.ticketDesc = ticketDesc;
+	}
+
+	@Column(name = "Ticket_Status", nullable = false, length = 20)
+	public String getTicketStatus() {
 		return this.ticketStatus;
 	}
 
-	public void setTicketStatus(int ticketStatus) {
+	public void setTicketStatus(String ticketStatus) {
 		this.ticketStatus = ticketStatus;
 	}
 

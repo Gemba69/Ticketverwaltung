@@ -1,5 +1,5 @@
 package com.hsw.model;
-// Generated 06.10.2015 15:00:23 by Hibernate Tools 4.0.0
+// Generated 06.10.2015 23:10:36 by Hibernate Tools 4.0.0
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -26,8 +26,10 @@ public class TicketTag implements java.io.Serializable {
 
 	@EmbeddedId
 
-	@AttributeOverrides({ @AttributeOverride(name = "tagId", column = @Column(name = "Tag_ID", nullable = false) ),
-			@AttributeOverride(name = "ticketId", column = @Column(name = "TicketID", nullable = false) ) })
+	@AttributeOverrides({
+			@AttributeOverride(name = "projectCode", column = @Column(name = "Project_Code", nullable = false, length = 5) ),
+			@AttributeOverride(name = "ticketId", column = @Column(name = "Ticket_ID", nullable = false) ),
+			@AttributeOverride(name = "tagName", column = @Column(name = "Tag_Name", nullable = false, length = 20) ) })
 	public TicketTagId getId() {
 		return this.id;
 	}

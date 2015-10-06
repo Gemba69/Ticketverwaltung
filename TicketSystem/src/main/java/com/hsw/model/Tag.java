@@ -1,10 +1,8 @@
 package com.hsw.model;
-// Generated 06.10.2015 15:00:23 by Hibernate Tools 4.0.0
+// Generated 06.10.2015 23:10:36 by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,7 +13,6 @@ import javax.persistence.Table;
 @Table(name = "Tag", catalog = "ticketverwaltung")
 public class Tag implements java.io.Serializable {
 
-	private Integer tagId;
 	private String tagName;
 	private String tagDesc;
 
@@ -32,18 +29,8 @@ public class Tag implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "Tag_ID", unique = true, nullable = false)
-	public Integer getTagId() {
-		return this.tagId;
-	}
-
-	public void setTagId(Integer tagId) {
-		this.tagId = tagId;
-	}
-
-	@Column(name = "Tag_Name", nullable = false, length = 30)
+	@Column(name = "Tag_Name", unique = true, nullable = false, length = 20)
 	public String getTagName() {
 		return this.tagName;
 	}
@@ -52,7 +39,7 @@ public class Tag implements java.io.Serializable {
 		this.tagName = tagName;
 	}
 
-	@Column(name = "Tag_Desc", length = 80)
+	@Column(name = "Tag_Desc", length = 40)
 	public String getTagDesc() {
 		return this.tagDesc;
 	}

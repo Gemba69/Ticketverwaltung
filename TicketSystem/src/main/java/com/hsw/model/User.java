@@ -1,5 +1,5 @@
 package com.hsw.model;
-// Generated 01.10.2015 14:24:38 by Hibernate Tools 4.0.0
+// Generated 06.10.2015 15:00:23 by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,18 +18,16 @@ public class User implements java.io.Serializable {
 	private String email;
 	private String vorname;
 	private String nachname;
-	private int roleId;
 
 	public User() {
 	}
 
-	public User(String username, String passwort, String email, String vorname, String nachname, int roleId) {
+	public User(String username, String passwort, String email, String vorname, String nachname) {
 		this.username = username;
 		this.passwort = passwort;
 		this.email = email;
 		this.vorname = vorname;
 		this.nachname = nachname;
-		this.roleId = roleId;
 	}
 
 	@Id
@@ -77,15 +75,6 @@ public class User implements java.io.Serializable {
 
 	public void setNachname(String nachname) {
 		this.nachname = nachname;
-	}
-
-	@Column(name = "Role_ID", nullable = false)
-	public int getRoleId() {
-		return this.roleId;
-	}
-
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
 	}
 
 }

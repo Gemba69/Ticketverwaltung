@@ -1,10 +1,8 @@
 package com.hsw.model;
-// Generated 01.10.2015 14:24:38 by Hibernate Tools 4.0.0
+// Generated 06.10.2015 15:00:23 by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,7 +13,6 @@ import javax.persistence.Table;
 @Table(name = "Role", catalog = "ticketverwaltung")
 public class Role implements java.io.Serializable {
 
-	private Integer roleId;
 	private String roleName;
 	private String roleDesc;
 
@@ -32,18 +29,8 @@ public class Role implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "Role_ID", unique = true, nullable = false)
-	public Integer getRoleId() {
-		return this.roleId;
-	}
-
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
-	}
-
-	@Column(name = "Role_Name", nullable = false, length = 30)
+	@Column(name = "Role_Name", unique = true, nullable = false, length = 30)
 	public String getRoleName() {
 		return this.roleName;
 	}

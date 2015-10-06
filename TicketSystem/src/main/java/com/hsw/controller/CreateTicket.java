@@ -7,21 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hsw.controller.EntityManager.EntityManagerFactoryUtil;
 import com.hsw.controller.EntityManager.EntityManagerUtil;
-import com.hsw.model.User;
+import com.hsw.model.Ticket;
 
 /**
- * Servlet implementation class DoRegister
+ * Servlet implementation class CreateTicket
  */
-@WebServlet("/DoRegister")
-public class DoRegister extends HttpServlet {
+@WebServlet("/CreateTicket")
+public class CreateTicket extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DoRegister() {
+    public CreateTicket() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +29,22 @@ public class DoRegister extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String ticketName = "";
 		
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		String email = request.getParameter("email");
+		//Project
+		//Ticket Issuer
+		//Author
+		//Beschreibung
+		//Status
 		
-		User newUser = new User();
-		newUser.setUsername(username);
-		newUser.setPasswort(password);
-		newUser.setEmail(email);
+		Ticket newTicket = new Ticket();
+		newTicket.setTicketName(ticketName);
 		
-		EntityManagerUtil.persistInstance(newUser);
+		EntityManagerUtil.persistInstance(newTicket);
 		
-	    response.sendRedirect("login.jsp");
 		
+		response.sendRedirect("");
 	}
 
 	/**

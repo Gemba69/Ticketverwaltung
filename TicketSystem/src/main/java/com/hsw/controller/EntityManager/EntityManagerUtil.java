@@ -1,4 +1,4 @@
-package com.hsw.controller.dbSession;
+package com.hsw.controller.EntityManager;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

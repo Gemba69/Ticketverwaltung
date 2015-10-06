@@ -22,8 +22,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.hsw.controller.dbSession.EntityManagerFactoryUtil;
-import com.hsw.controller.dbSession.EntityManagerUtil;
+import com.hsw.controller.EntityManager.EntityManagerFactoryUtil;
+import com.hsw.controller.EntityManager.EntityManagerUtil;
 import com.hsw.model.User;
 import com.mysql.jdbc.Connection;
 
@@ -48,15 +48,21 @@ public class DoLogin extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EntityManager em = EntityManagerFactoryUtil.createEntityManager();
+
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
 		
-		User user = new User("bluhn", "admin123", "bluhn@web.de", "Benjamin", "Luhn", 1);
-		User user2 = new User("test", "test", "test", "test","test", 1);
+		User user = EntityManagerFactoryUtil.createEntityManager().find(User.class, username);
+
+		if (user.getPasswort().equals(password)) {
+			response.sendRedirect("home.jsp");
+		} else {
+			//falsches Passwort
+			response.sendRedirect("login.jsp");
+		}
 		
-		em.persist(user);
 		
 		
-		response.sendRedirect("login.jsp");
 	}
 
 	/**

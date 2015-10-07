@@ -6,7 +6,7 @@
         <listener-class>FakeDataProvider</listener-class>
     </listener>
     <welcome-file-list>
-        <welcome-file>home.jsp</welcome-file>
+        <welcome-file>home</welcome-file>
     </welcome-file-list>
     <resource-ref>
         <description>DB Connection</description>
@@ -25,6 +25,7 @@
             <web-resource-name>All</web-resource-name>
             <description/>
             <url-pattern>/home.jsp</url-pattern>
+            <url-pattern>/home</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>admin</role-name>

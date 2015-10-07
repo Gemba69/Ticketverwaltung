@@ -9,12 +9,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%@include file="WEB-INF/head.jsp" %>
-        <title>Temporärer Titel</title>
-    </head>
+        <%@include file="head.jsp" %>
+        <title>${requestScope.title}</title>
+    </head><
     <body>
-        <c:import url="WEB-INF/header.jsp">
-            <c:param name="title" value="Meine Tickets" /> 
+        <c:import url="header.jsp">
+            <c:param name="title" value="${requestScope.title}" /> 
         </c:import>
         <main>
             <div class="container">
@@ -33,14 +33,14 @@
                                     <th>Priorität</th>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${applicationScope.projectList}" var="project">
+                                        <c:forEach items="${requestScope.projectList}" var="project">
                                             <c:forEach items="${project.tickets}" var="ticket">
                                                 <tr>
                                                     <td>${ticket.ticketId}</td>
                                                     <td>${project.projectId}</td>
                                                     <td>${ticket.ticketName}</td>
                                                     <td>${ticket.ticketStatus.status}</td>
-                                                    <td>${ticket.ticketIssuer}</td>
+                                                    <td>${ticket.ticketIssuer.firstName} ${ticket.ticketIssuer.lastName}</td>
                                                     <td>${ticket.ticketAuthor.firstName} ${ticket.ticketAuthor.lastName} </td>
                                                     <td>${ticket.ticketPrio}</td>
                                                 </tr>
@@ -54,6 +54,6 @@
                 </div>
             </div>
         </main>
-        <%@include file="WEB-INF/scripts.jsp" %>
+        <%@include file="scripts.jsp" %>
     </body>
 </html>

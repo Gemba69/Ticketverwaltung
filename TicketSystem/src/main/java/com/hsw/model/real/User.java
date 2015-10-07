@@ -7,6 +7,7 @@ package com.hsw.model.real;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -84,5 +85,23 @@ public class User {
 
     public void removeRole(int index) {
         this.roles.remove(index);
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof User) {
+            User other = (User)o;
+            if (other.getUserName().equals(this.userName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 13 * hash + Objects.hashCode(this.userName);
+        return hash;
     }
 }

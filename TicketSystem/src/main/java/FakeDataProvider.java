@@ -38,6 +38,7 @@ public class FakeDataProvider implements ServletContextListener, HttpSessionList
         Ticket guiBug = new Ticket(0, "Fehler in der GUI", "Die GUI ist vollkommen fehlerhaft und scheiße.", philipp);
         guiBug.setTicketStatus(open);
         guiBug.getComments().add(new Comment("In der Tat, die GUI ist nicht besonders schön.", jonas));
+        guiBug.setTicketIssuer(jonas);
         Ticket modelBug = new Ticket(1, "Fehler im Model", "Das Model ist verdammt gay, Benni!", jonas);
         modelBug.setTicketStatus(open);
         modelBug.getTags().add(hashTagGay);
@@ -54,7 +55,7 @@ public class FakeDataProvider implements ServletContextListener, HttpSessionList
 
     @Override
     public void sessionCreated(HttpSessionEvent se) {
-        se.getSession().setAttribute("user", "now");
+        se.getSession().setAttribute("user", new User("jonas", "asdf", "jonas.poeppelmann@gmail.com", "Jonas", "Pöppelmann"));
     }
 
     @Override

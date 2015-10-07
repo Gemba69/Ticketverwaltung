@@ -1,9 +1,9 @@
- header, main, footer, nav h1 {
+ header, main, footer, .page-title {
     padding-left: 240px;
   }
 
   @media only screen and (max-width : 992px) {
-    header, main, footer, nav h1 {
+    header, main, footer, .page-title {
       padding-left: 0;
     }
   }
@@ -13,7 +13,12 @@
       background-size: cover;
   }
   
-  nav h1 {
-      margin: 0;
+  nav {
+      height: 122px;
+  }
+  
+  .page-title {
+      line-height: 122px;
+      font-size: 48px;
   }
         

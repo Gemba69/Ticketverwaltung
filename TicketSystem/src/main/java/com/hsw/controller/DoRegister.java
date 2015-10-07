@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.realm.RealmBase;
+
 import com.hsw.controller.EntityManager.EntityManagerUtil;
 import com.hsw.model.User;
 
@@ -44,11 +46,12 @@ public class DoRegister extends HttpServlet {
 		newUser.setVorname(firstname);
 		newUser.setNachname(surname);
 		newUser.setUsername(username);
-		newUser.setPasswort(password);
+		newUser.setPasswort(RealmBase.Digest(password, "md5", "utf-8"));
 		newUser.setEmail(email);
 
 		try {
 			EntityManagerUtil.persistInstance(newUser);
+			
 			response.sendRedirect("login.jsp");
 		} catch (Exception e) {
 			request.setAttribute("failwarning", true);

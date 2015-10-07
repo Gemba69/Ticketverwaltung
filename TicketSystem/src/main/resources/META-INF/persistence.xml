@@ -13,7 +13,7 @@
 		<class>com.hsw.model.Ticket</class>
 		<class>com.hsw.model.TicketTag</class>
 		<class>com.hsw.model.User</class>
-		<class>com.hsw.model.User_Role</class>
+		<class>com.hsw.model.UserRole</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 		</properties>

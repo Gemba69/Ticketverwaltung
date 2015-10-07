@@ -1,18 +1,16 @@
 package com.hsw.controller;
 
-import com.hsw.controller.dbSession.EntityManagerUtil;
-import com.hsw.model.Role;
-import com.hsw.model.User;
-import com.hsw.model.UserRole;
-import com.hsw.model.UserRoleId;
 import java.io.IOException;
-import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.catalina.realm.RealmBase;
+
+import com.hsw.controller.EntityManager.EntityManagerUtil;
+import com.hsw.model.User;
 
 /**
  * Servlet implementation class DoRegister
@@ -20,32 +18,53 @@ import org.apache.catalina.realm.RealmBase;
 @WebServlet("/DoRegister")
 public class DoRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DoRegister() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            String password = RealmBase.Digest("asdf", "md5", "utf-8");
-            User user = new User("jonas", password, "jonas.poeppelmann@gmail.com", "Jonas", "Pöppelmann");
-            Role role = new Role("admin", "administrator");
-            UserRole ur = new UserRole(new UserRoleId("jonas", "admin"));
-            EntityManagerUtil.persistInstance(user);
-            EntityManagerUtil.persistInstance(role);
-            EntityManagerUtil.persistInstance(ur);
+	public DoRegister() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String firstname = request.getParameter("firstname");
+		String surname = request.getParameter("surname");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String email = request.getParameter("email");				
+
+		User newUser = new User();
+		newUser.setVorname(firstname);
+		newUser.setNachname(surname);
+		newUser.setUsername(username);
+		newUser.setPasswort(password);
+		newUser.setEmail(email);
+
+		try {
+			EntityManagerUtil.persistInstance(newUser);
+			response.sendRedirect("login.jsp");
+		} catch (Exception e) {
+			request.setAttribute("failwarning", true);
+			request.setAttribute("username", newUser.getUsername());
+			RequestDispatcher view = request.getRequestDispatcher("register.jsp");
+			view.forward(request, response);
+		}
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

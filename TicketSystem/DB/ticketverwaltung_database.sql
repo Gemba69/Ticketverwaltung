@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `User` (
    PRIMARY KEY (`Username`),
    UNIQUE KEY `UNIQUE_NAME` (`Username`),
    UNIQUE KEY `UNIQUE_EMAIL` (`Email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `Role` (
   `Role_Name` varchar(40) NOT NULL,
   `Role_Desc` varchar(100),
    PRIMARY KEY (`Role_Name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `User_Role` (
   PRIMARY KEY (`Username`, `Role_Name`), 
   FOREIGN KEY (`Username`) REFERENCES User (`Username`),
   FOREIGN KEY (`Role_Name`) REFERENCES Role (`Role_Name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  
  -- --------------------------------------------------------
 
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `Project` (
   PRIMARY KEY (`Project_Code`),
   UNIQUE KEY `UNIQUE_PROJECT_NAME` (`Project_Name`),
   FOREIGN KEY (`Project_Owner`) REFERENCES User (`Username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
  
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `Status_Typ` (
 `Status` varchar(20) NOT NULL,
   `Status_Desc` varchar(40),
   PRIMARY KEY (`Status`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
  -- --------------------------------------------------------
 
@@ -109,12 +109,13 @@ CREATE TABLE IF NOT EXISTS `Ticket` (
   `Ticket_Author` varchar(40) NOT NULL,
   `Ticket_Desc` varchar(200),
   `Ticket_Status` varchar(20) NOT NULL,
+  `Ticket_Priorität int(1) NOT NULL,
   PRIMARY KEY (`Project_Code`, `Ticket_ID`),
   FOREIGN KEY (`Project_Code`) REFERENCES Project (`Project_Code`),
   FOREIGN KEY (`Ticket_Issuer`) REFERENCES User (`Username`),
   FOREIGN KEY (`Ticket_Author`) REFERENCES User (`Username`),
   FOREIGN KEY (`Ticket_Status`) REFERENCES Status_Typ (`Status`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
  
  -- --------------------------------------------------------
 
@@ -128,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `Comment` (
   `Comment_Issuer` varchar(40) NOT NULL,
   PRIMARY KEY (`Comment_ID`), 
   FOREIGN KEY (`Comment_Issuer`) REFERENCES User (`Username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
  -- --------------------------------------------------------
  
@@ -143,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `Ticket_Comment` (
   `Ticket_ID` int(15) NOT NULL REFERENCES Ticket (`Ticket_ID`),
   `Comment_ID` int(11) NOT NULL REFERENCES Comment (`Comment_ID`),
   PRIMARY KEY (`Project_Code`, `Ticket_ID`, `Comment_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
  -- --------------------------------------------------------
 
@@ -155,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `Tag` (
 `Tag_Name` varchar(20) NOT NULL,
   `Tag_Desc` varchar(40),
   PRIMARY KEY (`Tag_Name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -168,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `Ticket_Tag` (
   `Ticket_ID` int(15) NOT NULL REFERENCES Ticket (`Ticket_ID`),
   `Tag_Name` varchar(20) NOT NULL REFERENCES Tag (`Tag_Name`),
   PRIMARY KEY (`Project_Code`, `Ticket_ID`, `Tag_Name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
  -- --------------------------------------------------------
 
@@ -186,14 +187,14 @@ Insert Into Status_Typ (Status, Status_Desc) VALUES ('open', 'Status für offene
 Insert Into Status_Typ (Status, Status_Desc) VALUES ('in work', 'Status für Ticket in Bearbeitung');
 Insert Into Status_Typ (Status, Status_Desc) VALUES ('done', 'Status für fertige Tickets');
 
-Insert Into User (Username, Passwort, Email) VALUES ('admin', 'admin', 'admin@web.de');
+Insert Into User (Username, Passwort, Email) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@web.de');
 Insert Into User_Role (Username, Role_Name) VALUES ('admin', 'admin');
 
 --
 -- User
 --
 CREATE USER ticket_user@localhost;
-SET password for Raeud@localhost = password('admin123');
+SET password for ticket_user@localhost = password('admin123');
 GRANT Select, Insert, Update on ticketverwaltung.* to ticket_user@localhost;
 
 

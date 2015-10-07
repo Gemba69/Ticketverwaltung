@@ -50,9 +50,8 @@ public class DoRegister extends HttpServlet {
 		newUser.setEmail(email);
 
 		try {
-			EntityManagerUtil.persistInstance(newUser);
-			
-			response.sendRedirect("login.jsp");
+			EntityManagerUtil.persistInstance(newUser);		
+			response.sendRedirect("home.jsp");
 		} catch (Exception e) {
 			request.setAttribute("failwarning", true);
 			request.setAttribute("username", newUser.getUsername());

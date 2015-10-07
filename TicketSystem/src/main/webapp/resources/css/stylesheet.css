@@ -1,10 +1,19 @@
- header, main, footer {
+ header, main, footer, nav h1 {
     padding-left: 240px;
   }
 
   @media only screen and (max-width : 992px) {
-    header, main, footer {
+    header, main, footer, nav h1 {
       padding-left: 0;
     }
+  }
+  
+  body {
+      background-image: url('../crap/background.jpg');
+      background-size: cover;
+  }
+  
+  nav h1 {
+      margin: 0;
   }
         

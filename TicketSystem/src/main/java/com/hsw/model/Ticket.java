@@ -1,11 +1,18 @@
 package com.hsw.model;
-// Generated 06.10.2015 23:10:36 by Hibernate Tools 4.0.0
+// Generated 07.10.2015 21:18:52 by Hibernate Tools 4.0.0
+
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -17,29 +24,37 @@ public class Ticket implements java.io.Serializable {
 
 	private TicketId id;
 	private String ticketName;
-	private String ticketIssuer;
-	private String ticketAuthor;
+	private User ticketIssuer;
+	private User ticketAuthor;
 	private String ticketDesc;
-	private String ticketStatus;
+	private StatusTyp ticketStatus;
+	private int ticketPriorität;
+	private Project project;
+	private Set<Comment> comments = new HashSet<Comment>(0);
 
 	public Ticket() {
 	}
 
-	public Ticket(TicketId id, String ticketName, String ticketAuthor, String ticketStatus) {
+	public Ticket(TicketId id, String ticketName, User ticketAuthor, StatusTyp ticketStatus, int ticketPriorität, Project project) {
 		this.id = id;
 		this.ticketName = ticketName;
 		this.ticketAuthor = ticketAuthor;
 		this.ticketStatus = ticketStatus;
+		this.ticketPriorität = ticketPriorität;
+		this.project = project;
 	}
 
-	public Ticket(TicketId id, String ticketName, String ticketIssuer, String ticketAuthor, String ticketDesc,
-			String ticketStatus) {
+	public Ticket(TicketId id, String ticketName, User ticketIssuer, User ticketAuthor, String ticketDesc,
+			StatusTyp ticketStatus, int ticketPriorität, Project project, Set<Comment> comments) {
 		this.id = id;
 		this.ticketName = ticketName;
 		this.ticketIssuer = ticketIssuer;
 		this.ticketAuthor = ticketAuthor;
 		this.ticketDesc = ticketDesc;
 		this.ticketStatus = ticketStatus;
+		this.ticketPriorität = ticketPriorität;
+		this.project = project;
+		this.comments = comments;
 	}
 
 	@EmbeddedId
@@ -64,21 +79,23 @@ public class Ticket implements java.io.Serializable {
 		this.ticketName = ticketName;
 	}
 
-	@Column(name = "Ticket_Issuer", length = 40)
-	public String getTicketIssuer() {
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ticket_issuer", nullable = false)
+	public User getTicketIssuer() {
 		return this.ticketIssuer;
 	}
 
-	public void setTicketIssuer(String ticketIssuer) {
+	public void setTicketIssuer(User ticketIssuer) {
 		this.ticketIssuer = ticketIssuer;
 	}
 
-	@Column(name = "Ticket_Author", nullable = false, length = 40)
-	public String getTicketAuthor() {
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ticket_author", nullable = false)
+	public User getTicketAuthor() {
 		return this.ticketAuthor;
 	}
 
-	public void setTicketAuthor(String ticketAuthor) {
+	public void setTicketAuthor(User ticketAuthor) {
 		this.ticketAuthor = ticketAuthor;
 	}
 
@@ -91,13 +108,45 @@ public class Ticket implements java.io.Serializable {
 		this.ticketDesc = ticketDesc;
 	}
 
-	@Column(name = "Ticket_Status", nullable = false, length = 20)
-	public String getTicketStatus() {
+	@ManyToOne(fetch = FetchType.LAZY)
+	public StatusTyp getTicketStatus() {
 		return this.ticketStatus;
 	}
 
-	public void setTicketStatus(String ticketStatus) {
+	public void setTicketStatus(StatusTyp ticketStatus) {
 		this.ticketStatus = ticketStatus;
 	}
+
+	@Column(name = "Ticket_Priorität", nullable = false)
+	public int getTicketPriorität() {
+		return this.ticketPriorität;
+	}
+
+	public void setTicketPriorität(int ticketPriorität) {
+		this.ticketPriorität = ticketPriorität;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "project_code", nullable = false)
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Ticket")
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	
+	
+	
 
 }

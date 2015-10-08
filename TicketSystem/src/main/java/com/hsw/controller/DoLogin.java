@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-import com.hsw.controller.dbSession.EntityManagerFactoryUtil;
-import com.hsw.controller.dbSession.EntityManagerUtil;
+import com.hsw.controller.EntityManager.EntityManagerFactoryUtil;
+import com.hsw.controller.EntityManager.EntityManagerUtil;
 import com.hsw.model.User;
 import com.mysql.jdbc.Connection;
 

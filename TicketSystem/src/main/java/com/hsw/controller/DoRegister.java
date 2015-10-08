@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.catalina.realm.RealmBase;
 
 import com.hsw.controller.EntityManager.EntityManagerUtil;
+import com.hsw.model.Role;
 import com.hsw.model.User;
 import com.hsw.model.UserRole;
 import com.hsw.model.UserRoleId;
@@ -51,8 +52,10 @@ public class DoRegister extends HttpServlet {
 		newUser.setPasswort(RealmBase.Digest(password, "md5", "utf-8"));
 		newUser.setEmail(email);
 		
+		Role role = null;
+		
 		UserRoleId newUserRoleId = new UserRoleId(newUser.getUsername(), "member");	
-		UserRole newUserRole = new UserRole(newUserRoleId);
+		UserRole newUserRole = new UserRole(newUserRoleId, newUser, role);
 
 		try {
 			EntityManagerUtil.persistInstance(newUser);

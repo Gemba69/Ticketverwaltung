@@ -1,11 +1,15 @@
 package com.hsw.model;
-// Generated 06.10.2015 23:10:36 by Hibernate Tools 4.0.0
+// Generated 07.10.2015 21:18:52 by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,13 +22,15 @@ public class Comment implements java.io.Serializable {
 	private Integer commentId;
 	private String comment;
 	private String commentIssuer;
+	private Ticket ticket;
 
 	public Comment() {
 	}
 
-	public Comment(String comment, String commentIssuer) {
+	public Comment(String comment, String commentIssuer, Ticket ticket) {
 		this.comment = comment;
 		this.commentIssuer = commentIssuer;
+		this.ticket = ticket;
 	}
 
 	@Id
@@ -56,5 +62,20 @@ public class Comment implements java.io.Serializable {
 	public void setCommentIssuer(String commentIssuer) {
 		this.commentIssuer = commentIssuer;
 	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumns({ 
+	@JoinColumn(name = "project_code", referencedColumnName="project_code", nullable = false),
+	@JoinColumn(name = "ticket_id", referencedColumnName="ticket_name", nullable = false)
+	})
+	public Ticket getTicket() {
+		return ticket;
+	}
+
+	public void setTicket(Ticket ticket) {
+		this.ticket = ticket;
+	}
+	
+	
 
 }

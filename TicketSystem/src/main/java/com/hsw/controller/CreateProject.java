@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.hsw.controller.EntityManager.EntityManagerUtil;
 import com.hsw.model.Project;
 import com.hsw.model.Ticket;
+import com.hsw.model.User;
 
 /**
  * Servlet implementation class CreateTicket
@@ -37,8 +38,10 @@ public class CreateProject extends HttpServlet {
         String projectName = (String) request.getAttribute("projectName");
         String projectCode = (String) request.getAttribute("projectCode");
         String projectDesc = (String) request.getAttribute("projectDesc");
-        String projectOwner = (String) request.getAttribute("projectOwner");
+        //String projectOwner = (String) request.getAttribute("projectOwner");
         Project newProject = new Project();
+        
+        User projectOwner = null;
 
         newProject.setProjectCode(projectCode);
         newProject.setProjectDesc(projectDesc);

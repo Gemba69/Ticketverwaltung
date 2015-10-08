@@ -1,5 +1,5 @@
 package com.hsw.model;
-// Generated 06.10.2015 23:10:36 by Hibernate Tools 4.0.0
+// Generated 07.10.2015 21:18:52 by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -21,7 +21,7 @@ public class UserRoleId implements java.io.Serializable {
 		this.roleName = roleName;
 	}
 
-	@Column(name = "Username", nullable = false, length = 40)
+	@Column(name = "username", nullable = false, length = 40)
 	public String getUsername() {
 		return this.username;
 	}
@@ -30,7 +30,7 @@ public class UserRoleId implements java.io.Serializable {
 		this.username = username;
 	}
 
-	@Column(name = "Role_Name", nullable = false, length = 40)
+	@Column(name = "role_name", nullable = false, length = 40)
 	public String getRoleName() {
 		return this.roleName;
 	}

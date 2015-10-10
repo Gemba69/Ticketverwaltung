@@ -46,7 +46,7 @@ public class CreateProject extends HttpServlet {
         newProject.setProjectCode(projectCode);
         newProject.setProjectDesc(projectDesc);
         newProject.setProjectName(projectName);
-        newProject.setProjectOwner(projectOwner);
+        newProject.setUser(projectOwner);
 
         EntityManagerUtil.persistInstance(newProject);
     }

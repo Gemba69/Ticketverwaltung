@@ -1,5 +1,5 @@
 package com.hsw.model;
-// Generated 07.10.2015 21:18:52 by Hibernate Tools 4.0.0
+// Generated 11.10.2015 00:41:08 by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

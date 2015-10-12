@@ -38,15 +38,14 @@ public class CreateProject extends HttpServlet {
         String projectName = (String) request.getAttribute("projectName");
         String projectCode = (String) request.getAttribute("projectCode");
         String projectDesc = (String) request.getAttribute("projectDesc");
-        //String projectOwner = (String) request.getAttribute("projectOwner");
+        User projectOwner = EntityManagerFactoryUtil.createEntityManager().find(User.class, (String) request.getAttribute("projectOwner"));
         Project newProject = new Project();
-        
-        User projectOwner = null;
 
         newProject.setProjectCode(projectCode);
         newProject.setProjectDesc(projectDesc);
         newProject.setProjectName(projectName);
         newProject.setUser(projectOwner);
+        newProject.setProjectCounter(0);
 
         EntityManagerUtil.persistInstance(newProject);
     }

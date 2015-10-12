@@ -58,28 +58,17 @@ public class HomeServlet extends HttpServlet {
         for (Project p : projects) {
             List<Ticket> returnTickets = new ArrayList<>();
             for (Ticket t : p.getTickets()) {
-                if (t.getTicketIssuer() != null && t.getTicketIssuer().equals(user) && title == TitleString.SELF) {
-                    returnTickets.add(t);
-                }
-                if (t.getTicketIssuer() != null && t.getTicketStatus().getStatus().equals("open") && t.getTicketIssuer().equals(user) && title == TitleString.SELFOPEN){
-                	returnTickets.add(t);
-                }
-                if (t.getTicketIssuer() != null && t.getTicketStatus().getStatus().equals("done") && t.getTicketIssuer().equals(user) && title == TitleString.SELFCLOSED){
-                	returnTickets.add(t);
-                } 
-                if (t.getTicketIssuer() != null && t.getTicketStatus().getStatus().equals("in work") && t.getTicketIssuer().equals(user) && title == TitleString.SELFINWORK){
-                	returnTickets.add(t);
-                } 
-                if (title == TitleString.ALL) {
-                    returnTickets.add(t);
-                }
-                if (t.getTicketStatus().getStatus().equals("open") && title == TitleString.OPEN){
-                	returnTickets.add(t);
-                }
-                if (t.getTicketStatus().getStatus().equals("done") && title == TitleString.CLOSED){
-                	returnTickets.add(t);
-                } 
-                if (t.getTicketStatus().getStatus().equals("in work") && title == TitleString.INWORK){
+                if (t.getTicketIssuer() != null && t.getTicketIssuer().equals(user) && title == TitleString.SELF ||
+                    t.getTicketIssuer() != null && t.getTicketStatus().getStatus().equals("open") && 
+                    t.getTicketIssuer().equals(user) && title == TitleString.SELFOPEN ||
+                    t.getTicketIssuer() != null && t.getTicketStatus().getStatus().equals("done") && 
+                    t.getTicketIssuer().equals(user) && title == TitleString.SELFCLOSED ||
+                    t.getTicketIssuer() != null && t.getTicketStatus().getStatus().equals("in work") && 
+                    t.getTicketIssuer().equals(user) && title == TitleString.SELFINWORK ||
+                    title == TitleString.ALL ||
+                    t.getTicketStatus().getStatus().equals("open") && title == TitleString.OPEN ||
+                    t.getTicketStatus().getStatus().equals("done") && title == TitleString.CLOSED ||
+                    t.getTicketStatus().getStatus().equals("in work") && title == TitleString.INWORK){
                 	returnTickets.add(t);
                 } 
             }

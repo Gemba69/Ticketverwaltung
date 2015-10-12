@@ -60,18 +60,18 @@ public class DoRegister extends HttpServlet {
 		Set<Role> roles = new HashSet<Role>(0);
 		roles.add(role);
 		newUser.setRoles(roles);
-
-		//try {
+                
+		if(!(containsUsername(newUser)||containsEmail(newUser))){
 			EntityManagerUtil.persistInstance(newUser);
 			response.sendRedirect("home.jsp");
-//		} catch (Exception e) {
-//			request.setAttribute("failwarning", true);
-//			request.setAttribute("username", newUser.getUsername());
-//			RequestDispatcher view = request.getRequestDispatcher("register.jsp");
-//			view.forward(request, response);
+		} else {
+			request.setAttribute("failwarning", true);
+			request.setAttribute("username", newUser.getUsername());
+			RequestDispatcher view = request.getRequestDispatcher("register.jsp");
+			view.forward(request, response);
 		}
 
-	//}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -82,5 +82,18 @@ public class DoRegister extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
+        
+        private boolean containsEmail(User user){
+            if(EntityManagerFactoryUtil.createEntityManager().createQuery("SELECT u FROM User u WHERE u.email = :mail",User.class).setParameter("mail", user.getEmail()).getResultList().isEmpty()){
+                return false;
+            }
+            return true;
+        }
+        
+        private boolean containsUsername(User user){
+            if(EntityManagerFactoryUtil.createEntityManager().createQuery("SELECT u FROM User u WHERE u.username = :uname",User.class).setParameter("uname", user.getUsername()).getResultList().isEmpty()){
+                return false;
+            }
+            return true;
+        }
 }

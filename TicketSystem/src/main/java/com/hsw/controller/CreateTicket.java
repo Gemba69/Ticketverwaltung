@@ -39,9 +39,9 @@ public class CreateTicket extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String ticketName = request.getParameter("ticketName");
-		String project_code = request.getParameter("project_code");
-		String beschreibung = request.getParameter("beschreibung");
-		String statusString = request.getParameter("status_typ");
+		String project_code = request.getParameter("projectCode");
+		String beschreibung = request.getParameter("description");
+		String statusString = request.getParameter("statusType");
 		String priorityString = request.getParameter("priority");
 		//TODO
 		User ticket_issuer = (User) request.getSession().getAttribute("user");
@@ -63,7 +63,7 @@ public class CreateTicket extends HttpServlet {
 		em.flush();
 		
 		
-		//response.sendRedirect("");
+		response.sendRedirect("home");
 	}
 
 	/**

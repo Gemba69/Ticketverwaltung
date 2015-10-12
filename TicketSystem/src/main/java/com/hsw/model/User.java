@@ -1,5 +1,5 @@
 package com.hsw.model;
-// Generated 11.10.2015 00:41:08 by Hibernate Tools 4.0.0
+// Generated 12.10.2015 15:58:50 by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;

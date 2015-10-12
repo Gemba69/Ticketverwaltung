@@ -99,8 +99,8 @@ ALTER TABLE project
  --
 -- Tabellenstruktur für Tabelle `Status_Typ`
 --	
-CREATE TABLE IF NOT EXISTS `Status_Typ` (
-`Status` varchar(20) NOT NULL,
+CREATE TABLE IF NOT EXISTS `status_Typ` (
+`status` varchar(20) NOT NULL,
   `Status_Desc` varchar(40),
   PRIMARY KEY (`Status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
 
 ALTER TABLE ticket
    ADD CONSTRAINT `fk_ticket` FOREIGN KEY(Project_Code)
-       REFERENCES role(`role_name`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+       REFERENCES project(`project_code`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE ticket
    ADD CONSTRAINT `fk_ticket_2` FOREIGN KEY(Ticket_Issuer)
        REFERENCES user(`username`) ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -134,7 +134,7 @@ ALTER TABLE ticket
        REFERENCES user(`username`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE ticket
    ADD CONSTRAINT `fk_ticket_4` FOREIGN KEY(Ticket_Status)
-       REFERENCES Status_Typ(`Status`) ON DELETE NO ACTION ON UPDATE NO ACTION;       
+       REFERENCES status_typ(`status`) ON DELETE NO ACTION ON UPDATE NO ACTION;
  
  -- --------------------------------------------------------
 

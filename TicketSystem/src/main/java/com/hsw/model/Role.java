@@ -1,5 +1,5 @@
 package com.hsw.model;
-// Generated 11.10.2015 00:41:08 by Hibernate Tools 4.0.0
+// Generated 12.10.2015 15:58:50 by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,7 +19,6 @@ public class Role implements java.io.Serializable {
 
 	private String roleName;
 	private String roleDesc;
-	private Set<Ticket> tickets = new HashSet<Ticket>(0);
 	private Set<User> users = new HashSet<User>(0);
 
 	public Role() {
@@ -30,10 +28,9 @@ public class Role implements java.io.Serializable {
 		this.roleName = roleName;
 	}
 
-	public Role(String roleName, String roleDesc, Set<Ticket> tickets, Set<User> users) {
+	public Role(String roleName, String roleDesc, Set<User> users) {
 		this.roleName = roleName;
 		this.roleDesc = roleDesc;
-		this.tickets = tickets;
 		this.users = users;
 	}
 
@@ -55,15 +52,6 @@ public class Role implements java.io.Serializable {
 
 	public void setRoleDesc(String roleDesc) {
 		this.roleDesc = roleDesc;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
-	public Set<Ticket> getTickets() {
-		return this.tickets;
-	}
-
-	public void setTickets(Set<Ticket> tickets) {
-		this.tickets = tickets;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")

@@ -1,5 +1,5 @@
 package com.hsw.model;
-// Generated 11.10.2015 00:41:08 by Hibernate Tools 4.0.0
+// Generated 12.10.2015 15:58:50 by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -21,7 +21,7 @@ public class TicketId implements java.io.Serializable {
 		this.ticketId = ticketId;
 	}
 
-	@Column(name = "project_code", nullable = false, length = 40)
+	@Column(name = "project_code", nullable = false, length = 5)
 	public String getProjectCode() {
 		return this.projectCode;
 	}

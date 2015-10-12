@@ -1,5 +1,5 @@
 package com.hsw.model;
-// Generated 11.10.2015 00:41:08 by Hibernate Tools 4.0.0
+// Generated 12.10.2015 15:58:50 by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,12 +22,12 @@ import javax.persistence.Table;
 public class Ticket implements java.io.Serializable {
 
 	private TicketId id;
-	private Role role;
+	private Project project;
+	private StatusTyp statusTyp;
 	private User userByTicketIssuer;
 	private User userByTicketAuthor;
 	private String ticketName;
 	private String ticketDesc;
-	private String ticketStatus;
 	private int ticketPriorität;
 	private Set<Comment> comments = new HashSet<Comment>(0);
 	private Set<TicketTag> ticketTags = new HashSet<TicketTag>(0);
@@ -35,26 +35,26 @@ public class Ticket implements java.io.Serializable {
 	public Ticket() {
 	}
 
-	public Ticket(TicketId id, Role role, User userByTicketAuthor, String ticketName, String ticketStatus,
+	public Ticket(TicketId id, Project project, StatusTyp statusTyp, User userByTicketAuthor, String ticketName,
 			int ticketPriorität) {
 		this.id = id;
-		this.role = role;
+		this.project = project;
+		this.statusTyp = statusTyp;
 		this.userByTicketAuthor = userByTicketAuthor;
 		this.ticketName = ticketName;
-		this.ticketStatus = ticketStatus;
 		this.ticketPriorität = ticketPriorität;
 	}
 
-	public Ticket(TicketId id, Role role, User userByTicketIssuer, User userByTicketAuthor, String ticketName,
-			String ticketDesc, String ticketStatus, int ticketPriorität, Set<Comment> comments,
+	public Ticket(TicketId id, Project project, StatusTyp statusTyp, User userByTicketIssuer, User userByTicketAuthor,
+			String ticketName, String ticketDesc, int ticketPriorität, Set<Comment> comments,
 			Set<TicketTag> ticketTags) {
 		this.id = id;
-		this.role = role;
+		this.project = project;
+		this.statusTyp = statusTyp;
 		this.userByTicketIssuer = userByTicketIssuer;
 		this.userByTicketAuthor = userByTicketAuthor;
 		this.ticketName = ticketName;
 		this.ticketDesc = ticketDesc;
-		this.ticketStatus = ticketStatus;
 		this.ticketPriorität = ticketPriorität;
 		this.comments = comments;
 		this.ticketTags = ticketTags;
@@ -63,7 +63,7 @@ public class Ticket implements java.io.Serializable {
 	@EmbeddedId
 
 	@AttributeOverrides({
-			@AttributeOverride(name = "projectCode", column = @Column(name = "project_code", nullable = false, length = 40) ),
+			@AttributeOverride(name = "projectCode", column = @Column(name = "project_code", nullable = false, length = 5) ),
 			@AttributeOverride(name = "ticketId", column = @Column(name = "Ticket_ID", nullable = false) ) })
 	public TicketId getId() {
 		return this.id;
@@ -75,12 +75,22 @@ public class Ticket implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "project_code", nullable = false, insertable = false, updatable = false)
-	public Role getRole() {
-		return this.role;
+	public Project getProject() {
+		return this.project;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Ticket_Status", nullable = false)
+	public StatusTyp getStatusTyp() {
+		return this.statusTyp;
+	}
+
+	public void setStatusTyp(StatusTyp statusTyp) {
+		this.statusTyp = statusTyp;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -119,15 +129,6 @@ public class Ticket implements java.io.Serializable {
 
 	public void setTicketDesc(String ticketDesc) {
 		this.ticketDesc = ticketDesc;
-	}
-
-	@Column(name = "Ticket_Status", nullable = false, length = 20)
-	public String getTicketStatus() {
-		return this.ticketStatus;
-	}
-
-	public void setTicketStatus(String ticketStatus) {
-		this.ticketStatus = ticketStatus;
 	}
 
 	@Column(name = "Ticket_Priorität", nullable = false)

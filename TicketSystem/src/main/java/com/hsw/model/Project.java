@@ -1,12 +1,15 @@
 package com.hsw.model;
-// Generated 11.10.2015 00:41:08 by Hibernate Tools 4.0.0
+// Generated 12.10.2015 15:58:50 by Hibernate Tools 4.0.0
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -22,6 +25,7 @@ public class Project implements java.io.Serializable {
 	private String projectName;
 	private String projectDesc;
 	private int projectCounter;
+	private Set<Ticket> tickets = new HashSet<Ticket>(0);
 
 	public Project() {
 	}
@@ -33,12 +37,14 @@ public class Project implements java.io.Serializable {
 		this.projectCounter = projectCounter;
 	}
 
-	public Project(String projectCode, User user, String projectName, String projectDesc, int projectCounter) {
+	public Project(String projectCode, User user, String projectName, String projectDesc, int projectCounter,
+			Set<Ticket> tickets) {
 		this.projectCode = projectCode;
 		this.user = user;
 		this.projectName = projectName;
 		this.projectDesc = projectDesc;
 		this.projectCounter = projectCounter;
+		this.tickets = tickets;
 	}
 
 	@Id
@@ -87,6 +93,15 @@ public class Project implements java.io.Serializable {
 
 	public void setProjectCounter(int projectCounter) {
 		this.projectCounter = projectCounter;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	public Set<Ticket> getTickets() {
+		return this.tickets;
+	}
+
+	public void setTickets(Set<Ticket> tickets) {
+		this.tickets = tickets;
 	}
 
 }

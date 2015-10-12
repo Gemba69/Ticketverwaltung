@@ -1,11 +1,15 @@
 package com.hsw.model;
-// Generated 06.10.2015 23:10:36 by Hibernate Tools 4.0.0
+// Generated 11.10.2015 00:41:08 by Hibernate Tools 4.0.0
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,12 +20,14 @@ import javax.persistence.Table;
 public class TicketTag implements java.io.Serializable {
 
 	private TicketTagId id;
+	private Ticket ticket;
 
 	public TicketTag() {
 	}
 
-	public TicketTag(TicketTagId id) {
+	public TicketTag(TicketTagId id, Ticket ticket) {
 		this.id = id;
+		this.ticket = ticket;
 	}
 
 	@EmbeddedId
@@ -36,6 +42,18 @@ public class TicketTag implements java.io.Serializable {
 
 	public void setId(TicketTagId id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumns({
+			@JoinColumn(name = "Project_Code", referencedColumnName = "project_code", nullable = false, insertable = false, updatable = false),
+			@JoinColumn(name = "Ticket_ID", referencedColumnName = "Ticket_ID", nullable = false, insertable = false, updatable = false) })
+	public Ticket getTicket() {
+		return this.ticket;
+	}
+
+	public void setTicket(Ticket ticket) {
+		this.ticket = ticket;
 	}
 
 }

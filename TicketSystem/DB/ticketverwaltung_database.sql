@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `ticketverwaltung`
 --
+Drop User ticket_user@localhost;
+Drop database ticketverwaltung;
 Create database ticketverwaltung;
 
 Use ticketverwaltung;
@@ -28,16 +30,17 @@ Use ticketverwaltung;
 -- Tabellenstruktur für Tabelle `User`
 --
 	
-CREATE TABLE IF NOT EXISTS `User` (
-`Username` varchar(30) NOT NULL,
-  `Passwort` varchar(32) NOT NULL,
-  `Email` varchar(40) NOT NULL,
-  `Vorname` varchar(40),
-  `Nachname`varchar(40),
-   PRIMARY KEY (`Username`),
-   UNIQUE KEY `UNIQUE_NAME` (`Username`),
-   UNIQUE KEY `UNIQUE_EMAIL` (`Email`)
+CREATE TABLE user (
+username varchar(40) NOT NULL,
+  passwort varchar(32) NOT NULL,
+  email varchar(40) NOT NULL,
+  vorname varchar(40),
+  nachname varchar(40),
+   PRIMARY KEY (username),
+   UNIQUE KEY UNIQUE_NAME (username),
+   UNIQUE KEY UNIQUE_EMAIL (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- --------------------------------------------------------
 
@@ -45,44 +48,51 @@ CREATE TABLE IF NOT EXISTS `User` (
 -- Tabellenstruktur für Tabelle `Role`
 --
 	
-CREATE TABLE IF NOT EXISTS `Role` (
-  `Role_Name` varchar(40) NOT NULL,
-  `Role_Desc` varchar(100),
-   PRIMARY KEY (`Role_Name`)
+CREATE TABLE role (
+  role_name varchar(40) NOT NULL,
+  role_Desc varchar(100),
+   PRIMARY KEY (role_Name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `User_Role`
+-- Tabellenstruktur für Tabelle `user_role`
 --
 	
-CREATE TABLE IF NOT EXISTS `User_Role` (
-  `Username` varchar(40) NOT NULL,
-  `Role_Name` varchar(40) NOT NULL,
-  PRIMARY KEY (`Username`, `Role_Name`), 
-  FOREIGN KEY (`Username`) REFERENCES User (`Username`),
-  FOREIGN KEY (`Role_Name`) REFERENCES Role (`Role_Name`)
+CREATE TABLE user_role (
+  username varchar(40) NOT NULL , -- REFERENCES User (username),
+  role_name varchar(40) NOT NULL , -- REFERENCES Role (role_Name)
+  PRIMARY KEY (username, role_name) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE user_role
+   ADD CONSTRAINT `fk_user_role` FOREIGN KEY(username)
+       REFERENCES user(`username`) ON DELETE NO ACTION ON UPDATE NO ACTION;
  
+ALTER TABLE user_role
+   ADD CONSTRAINT `fk_user_role_2` FOREIGN KEY(role_name)
+       REFERENCES role(`role_name`) ON DELETE NO ACTION ON UPDATE NO ACTION;
  -- --------------------------------------------------------
 
 --
 -- Tabellenstruktur für Tabelle `Project`
 --
 	
-CREATE TABLE IF NOT EXISTS `Project` (
-`Project_Code` varchar(5) NOT NULL,
-  `Project_Name` varchar(40) NOT NULL,
-  `Project_Owner` varchar(40) NOT NULL,
-  `Project_Desc` varchar(40),
-  `Project_Counter` int(11) NOT NULL,
-  PRIMARY KEY (`Project_Code`),
-  UNIQUE KEY `UNIQUE_PROJECT_NAME` (`Project_Name`),
-  FOREIGN KEY (`Project_Owner`) REFERENCES User (`Username`)
+CREATE TABLE project (
+project_code varchar(5) NOT NULL,
+  project_name varchar(40) NOT NULL,
+  project_owner varchar(40) NOT NULL, -- REFERENCES User (username) ON DELETE CASCADE,
+  project_desc varchar(40),
+  project_counter int(11) NOT NULL,
+  PRIMARY KEY (project_code),
+  UNIQUE KEY UNIQUE_PROJECT_NAME (project_Name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+ALTER TABLE project
+   ADD CONSTRAINT `fk_project` FOREIGN KEY(project_owner)
+       REFERENCES user(`username`) ON DELETE NO ACTION ON UPDATE NO ACTION;
  
  -- --------------------------------------------------------
  
@@ -101,21 +111,30 @@ CREATE TABLE IF NOT EXISTS `Status_Typ` (
 -- Tabellenstruktur für Tabelle `Ticket`
 --
 	
-CREATE TABLE IF NOT EXISTS `Ticket` (
-  `Project_Code` varchar(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `ticket` (
+  `project_code` varchar(5) NOT NULL,
   `Ticket_ID` int(15) NOT NULL,
   `Ticket_Name` varchar(40) NOT NULL,
   `Ticket_Issuer` varchar(40),
   `Ticket_Author` varchar(40) NOT NULL,
   `Ticket_Desc` varchar(200),
   `Ticket_Status` varchar(20) NOT NULL,
-  `Ticket_Priorität int(1) NOT NULL,
-  PRIMARY KEY (`Project_Code`, `Ticket_ID`),
-  FOREIGN KEY (`Project_Code`) REFERENCES Project (`Project_Code`),
-  FOREIGN KEY (`Ticket_Issuer`) REFERENCES User (`Username`),
-  FOREIGN KEY (`Ticket_Author`) REFERENCES User (`Username`),
-  FOREIGN KEY (`Ticket_Status`) REFERENCES Status_Typ (`Status`)
+  `Ticket_Priorität` int(1) NOT NULL,
+  PRIMARY KEY (`Project_Code`, `Ticket_ID`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE ticket
+   ADD CONSTRAINT `fk_ticket` FOREIGN KEY(Project_Code)
+       REFERENCES role(`role_name`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE ticket
+   ADD CONSTRAINT `fk_ticket_2` FOREIGN KEY(Ticket_Issuer)
+       REFERENCES user(`username`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE ticket
+   ADD CONSTRAINT `fk_ticket_3` FOREIGN KEY(Ticket_Author)
+       REFERENCES user(`username`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE ticket
+   ADD CONSTRAINT `fk_ticket_4` FOREIGN KEY(Ticket_Status)
+       REFERENCES Status_Typ(`Status`) ON DELETE NO ACTION ON UPDATE NO ACTION;       
  
  -- --------------------------------------------------------
 
@@ -126,27 +145,21 @@ CREATE TABLE IF NOT EXISTS `Ticket` (
 CREATE TABLE IF NOT EXISTS `Comment` (
 `Comment_ID` int(11) NOT NULL AUTO_INCREMENT,
 `Comment` varchar(200) NOT NULL,
-  `Comment_Issuer` varchar(40) NOT NULL,
-  PRIMARY KEY (`Comment_ID`), 
-  FOREIGN KEY (`Comment_Issuer`) REFERENCES User (`Username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `Comment_Issuer` varchar(40),
+  `Ticket_ID` int(15) NOT NULL,
+  Project_Code varchar(5),
+  PRIMARY KEY (`Comment_ID`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  
+ALTER TABLE Comment
+   ADD CONSTRAINT `fk_comment` FOREIGN KEY(Comment_Issuer)
+       REFERENCES user(`username`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE Comment
+   ADD CONSTRAINT `fk_comment_2` FOREIGN KEY(Project_Code, Ticket_ID)
+       REFERENCES ticket(project_code, Ticket_ID) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
  -- --------------------------------------------------------
  
-  
-
---
--- Tabellenstruktur für Tabelle `Ticket_Comment`
---
-	
-CREATE TABLE IF NOT EXISTS `Ticket_Comment` (
-  `Project_Code` varchar(5) NOT NULL REFERENCES Ticket (`Project_Code`),
-  `Ticket_ID` int(15) NOT NULL REFERENCES Ticket (`Ticket_ID`),
-  `Comment_ID` int(11) NOT NULL REFERENCES Comment (`Comment_ID`),
-  PRIMARY KEY (`Project_Code`, `Ticket_ID`, `Comment_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
- -- --------------------------------------------------------
 
 --
 -- Tabellenstruktur für Tabelle `Tag`
@@ -165,11 +178,17 @@ CREATE TABLE IF NOT EXISTS `Tag` (
 --
 	
 CREATE TABLE IF NOT EXISTS `Ticket_Tag` (
-  `Project_Code` varchar(5) NOT NULL REFERENCES Ticket (`Project_Code`),
-  `Ticket_ID` int(15) NOT NULL REFERENCES Ticket (`Ticket_ID`),
-  `Tag_Name` varchar(20) NOT NULL REFERENCES Tag (`Tag_Name`),
+  `Project_Code` varchar(5) NOT NULL,
+  `Ticket_ID` int(15) NOT NULL,
+  `Tag_Name` varchar(20) NOT NULL,
   PRIMARY KEY (`Project_Code`, `Ticket_ID`, `Tag_Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE Ticket_Tag
+   ADD CONSTRAINT `fk_tag` FOREIGN KEY(Tag_Name)
+       REFERENCES Tag(`Tag_Name`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE Ticket_Tag
+   ADD CONSTRAINT `fk_tag_2` FOREIGN KEY(Project_Code, Ticket_ID)
+       REFERENCES ticket(project_code, Ticket_ID) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
  -- --------------------------------------------------------
 

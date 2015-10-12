@@ -11,10 +11,11 @@
     <head>
         <%@include file="head.jsp" %>
         <title>${requestScope.title}</title>
-    </head><
+    </head>
     <body>
         <c:import url="header.jsp">
-            <c:param name="title" value="${requestScope.title}" /> 
+            <c:param name="title" value="${requestScope.title}" />
+            <c:param name="username" value="Jonas Pöppelmann" />
         </c:import>
         <main>
             <div class="container">
@@ -66,11 +67,10 @@
                                                         </div>
                                                         <div class="col s5">
                                                             <c:forEach items="${ticket.comments}" var="comm">
-                                                                <div class="col s12 blue darken-3 white-text">
-                                                                    <p>${comm.comment}</p>
+                                                                <div class="card-panel col s12 blue darken-3 white-text">
+                                                                    ${comm.comment}<br>
                                                                     <span class="comment-author orange-text">${comm.commentIssuer.firstName} ${comm.commentIssuer.lastName}</span>
                                                                 </div>
-                                                                <div class="divider"></div>
                                                             </c:forEach>
                                                             <div class="input-field col s12">
                                                                 <textarea id="commentfield" class="materialize-textarea"></textarea>
@@ -89,6 +89,7 @@
                 </div>
             </div>
         </main>
+        <%@include file="createTicketModal.jsp" %>
         <%@include file="scripts.jsp" %>
     </body>
 </html>

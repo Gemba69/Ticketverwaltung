@@ -1,32 +1,44 @@
- header, main, footer, .page-title {
+header, main, footer, .page-title {
     padding-left: 240px;
-  }
+}
 
-  @media only screen and (max-width : 992px) {
+@media only screen and (max-width : 992px) {
     header, main, footer, .page-title {
-      padding-left: 0;
+        padding-left: 0;
     }
-  }
-  
-  body {
-      background-image: url('../crap/background.jpg');
-      background-size: cover;
-  }
-  
-  nav {
-      height: 122px;
-  }
-  
-  .page-title {
-      line-height: 122px;
-      font-size: 48px;
-  }
-        
-  .prop-header {
-      line-height: 2em;
-      font-size: 250%;
-  }
-  
-  .comment-author {
-      font-style: italic;
-  }
+}
+
+body {
+    background-image: url('../crap/background.jpg');
+    background-size: cover;
+}
+
+nav {
+    height: 122px;
+}
+
+.page-title {
+    line-height: 122px;
+    font-size: 48px;
+}
+
+.prop-header {
+    line-height: 2em;
+    font-size: 150%;
+}
+
+.comment-author {
+    font-style: italic;
+    font-size: 85%;
+}
+
+ul.side-nav.fixed .logo {
+    text-align: center;
+    margin-top: 32px;
+    margin-bottom: 80px;
+}
+
+#logo-container {
+    height: 57px;
+    margin-bottom: 32px;
+}

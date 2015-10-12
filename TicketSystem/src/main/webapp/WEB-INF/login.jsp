@@ -17,7 +17,7 @@
                                 <img src="resources/crap/login.jpg">
                                 <span class="card-title">Login</span>
                             </div>
-                            <div class="card-content white-text">
+                            <div class="card-content">
                                 <c:if test="${param.failed == 'true'}">
                                     <p class="red-text">Falsche Benutzerdaten.</p>
                                 </c:if>

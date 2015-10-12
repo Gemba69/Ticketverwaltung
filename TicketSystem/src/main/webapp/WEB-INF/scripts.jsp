@@ -3,5 +3,7 @@
 <script type="text/javascript">
     $(document).ready(function init() {
         $(".button-collapse").sideNav();
+        $('.modal-trigger').leanModal();
+        $('select').material_select();
     });
 </script>

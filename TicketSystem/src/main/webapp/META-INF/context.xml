@@ -40,9 +40,9 @@
     <ResourceLink name="jdbc/ticketverwaltung"
                   global="jdbc/ticketverwaltung"
                   type="javax.sql.DataSource" />
-    <Realm className="org.apache.catalina.realm.JDBCRealm"
-            driverName="com.mysql.jdbc.Driver"
-            connectionURL="jdbc:mysql://localhost/ticketverwaltung?user=ticket_user&amp;password=admin123"
-            userTable="user" userNameCol="Username" userCredCol="Passwort"
-            userRoleTable="user_role" roleNameCol="Role_Name" digest="MD5"/>
+    <Realm className="org.apache.catalina.realm.DataSourceRealm"
+          localDataSource="true"
+          dataSourceName="jdbc/ticketverwaltung"
+          userTable="user" userNameCol="Username" userCredCol="Passwort"
+          userRoleTable="user_role" roleNameCol="Role_Name" digest="MD5"/>
 </Context>

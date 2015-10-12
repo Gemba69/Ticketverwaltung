@@ -22,3 +22,11 @@
       font-size: 48px;
   }
         
+  .prop-header {
+      line-height: 2em;
+      font-size: 250%;
+  }
+  
+  .comment-author {
+      font-style: italic;
+  }

@@ -35,10 +35,6 @@ public class HomeServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        TitleString title = null;
-        switch (request.getParameter("view")) {
-            case "self": title = TitleString.SELF;
-        }
         ServletContext sc = request.getServletContext();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -60,7 +56,7 @@ public class HomeServlet extends HttpServlet {
             }
         }
         request.setAttribute("projectList", returnProjects);
-        request.setAttribute("title", title.getTitle());
+        request.setAttribute("title", "Meine Tickdets");
         request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
     }
 

@@ -38,13 +38,26 @@ public class FakeDataProvider implements ServletContextListener, HttpSessionList
         Ticket guiBug = new Ticket(0, "Fehler in der GUI", "Die GUI ist vollkommen fehlerhaft und scheiße.", philipp);
         guiBug.setTicketStatus(open);
         guiBug.getComments().add(new Comment("In der Tat, die GUI ist nicht besonders schön.", jonas));
+        guiBug.getComments().add(new Comment("Deine Mudda Schwitzt beim kacken, jonas", philipp));
+        guiBug.getComments().add(new Comment("Deine Groß-kleinschreibung ist falsch, Philipp.", jonas));
+        guiBug.getComments().add(new Comment("fuck youuuu", philipp));
         guiBug.setTicketIssuer(jonas);
+        List<Ticket> tickets = new ArrayList<Ticket>();
+        for (int i = 0; i < 20; i++) {
+            Ticket ticket = new Ticket(i + 1, "Ticket " + i, "TicketDesc " + i, philipp);
+            ticket.setTicketIssuer(jonas);
+            ticket.setTicketStatus(open);
+            tickets.add(ticket);
+        }
         Ticket modelBug = new Ticket(1, "Fehler im Model", "Das Model ist verdammt gay, Benni!", jonas);
         modelBug.setTicketStatus(open);
         modelBug.getTags().add(hashTagGay);
         Project ticketSystem = new Project(0, "Ticketsystem", "Unser aktuelles Projekt. Rekursiv, nicht wahr?", jonas);
         ticketSystem.getTickets().add(guiBug);
         ticketSystem.getTickets().add(modelBug);
+        for (Ticket t : tickets) {
+            ticketSystem.getTickets().add(t);
+        }
         projects.add(ticketSystem);
         sce.getServletContext().setAttribute("projectList", projects);
     }

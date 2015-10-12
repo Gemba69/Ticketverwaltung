@@ -51,6 +51,7 @@ public class HomeServlet extends HttpServlet {
             case "selfopen": title = TitleString.SELFOPEN; break;
             case "selfclose": title = TitleString.SELFCLOSED; break;
             case "selfinwork": title = TitleString.SELFINWORK; break;
+            default: title = TitleString.SELF;
         }
         
         List<Project> returnProjects = new ArrayList<>();

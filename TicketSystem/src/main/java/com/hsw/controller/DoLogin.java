@@ -46,7 +46,7 @@ public class DoLogin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("home.jsp");
 	}
 
 	/**

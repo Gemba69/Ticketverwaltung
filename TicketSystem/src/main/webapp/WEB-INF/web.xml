@@ -6,7 +6,7 @@
         <listener-class>FakeDataProvider</listener-class>
     </listener>
     <welcome-file-list>
-        <welcome-file>home</welcome-file>
+        <welcome-file>home?view=self</welcome-file>
     </welcome-file-list>
     <resource-ref>
         <description>DB Connection</description>

@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `Ticket_Name` varchar(40) NOT NULL,
   `Ticket_Issuer` varchar(40),
   `Ticket_Author` varchar(40) NOT NULL,
-  `Ticket_Desc` varchar(200),
+  `Ticket_Desc` varchar(800),
   `Ticket_Status` varchar(20) NOT NULL,
   `Ticket_Priorität` int(1) NOT NULL,
   PRIMARY KEY (`Project_Code`, `Ticket_ID`)

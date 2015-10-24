@@ -34,9 +34,9 @@
                                     <th>Priorität</th>
                                     </thead>
                                 </table>
-                                <ul class="collapsible" data-collapsible="accordion">
+                                <ul class="collapsible" data-collapsible="accordion">                              	                             
                                     <c:forEach items="${requestScope.projectList}" var="project">
-                                        <c:forEach items="${project.tickets}" var="ticket">
+                                        <c:forEach items="${project.tickets}" var="ticket">                                       
                                             <li>
                                                 <div class="collapsible-header">
                                                     <table>
@@ -79,7 +79,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </li>
+                                            </li>                                      
                                         </c:forEach>
                                     </c:forEach>
                                 </ul>

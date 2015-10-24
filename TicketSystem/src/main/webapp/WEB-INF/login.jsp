@@ -32,6 +32,7 @@
                                 <button class="btn waves-effect waves-light blue center-align" type="submit" name="action">Login
                                     <i class="material-icons right">send</i>
                                 </button>
+                                <a href="/TicketSystem/register.jsp" class="btn waves-effect waves-light green right" type="submit" name="action">Zur Registrierung</a>
                             </div>
                         </div>
                     </div>

@@ -42,3 +42,11 @@ ul.side-nav.fixed .logo {
     height: 57px;
     margin-bottom: 32px;
 }
+
+.test {
+	visibility:hidden;
+}
+
+.test2 {
+	visibility:visible;
+}

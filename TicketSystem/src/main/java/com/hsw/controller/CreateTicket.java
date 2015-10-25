@@ -41,19 +41,14 @@ public class CreateTicket extends HttpServlet {
 		String description = request.getParameter("description");
 		String statusString = "open";
 		String priorityString = request.getParameter("priority");
-		//TODO
 		User ticketAuthor = (User) request.getSession().getAttribute("user");
 		
 		EntityManager em = EntityManagerFactoryUtil.createEntityManager();
 		
 		
 		StatusTyp ticketStatus = em.find(StatusTyp.class, statusString);
-		Project project = null;
-		for (Project p : (List<Project>)request.getServletContext().getAttribute("projectList")) {
-			if (p.getProjectCode().equals(projectCode)) {
-				project = p;
-			}
-		}
+		Project project = em.find(Project.class, projectCode);
+	
 		int counter = project.getProjectCounter() + 1;
 		int priority = Integer.parseInt(priorityString);
 		TicketId id = new TicketId(project.getProjectCode(), counter);
@@ -61,16 +56,17 @@ public class CreateTicket extends HttpServlet {
 		
 		Ticket newTicket = new Ticket(id, project, ticketStatus, ticketAuthor, ticketName, priority);
 		newTicket.setTicketDesc(description);
+
 		EntityManagerUtil.persistInstance(newTicket);
 
 		
 		em.getTransaction().begin();
 		project.setProjectCounter(counter);
-		//project.getTickets().add(newTicket);
+		project.getTickets().add(newTicket);
 		em.getTransaction().commit();
 		EntityManagerFactoryUtil.refreshProjectList(request.getServletContext());		
 		
-		response.sendRedirect("home");
+		response.sendRedirect("home?view=" + request.getSession().getAttribute("lastViewParam"));
 	}
 
 }

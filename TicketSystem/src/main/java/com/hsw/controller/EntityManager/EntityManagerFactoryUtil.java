@@ -44,12 +44,6 @@ public class EntityManagerFactoryUtil implements ServletContextListener {
     public static void refreshProjectList(ServletContext c) {
     	EntityManager em = createEntityManager();
     	List<Project> projects = em.createQuery("SELECT p FROM Project p", Project.class).getResultList();
-    	System.out.println("refreshProjectList aufgerufen");
-    	for (Project p : projects) {
-    		for (Ticket t : p.getTickets()) {
-    			System.out.println(t.getId() + " " + t.getTicketName());
-    		}
-    	}
     	c.setAttribute("projectList", projects);
     }
     

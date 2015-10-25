@@ -1,14 +1,5 @@
-<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large blue">
-        <i class="large material-icons">add</i>
-    </a>
-    <ul>
-        <li><a class="btn-floating yellow darken-1 tooltipped" data-position="left" data-delay="50" data-tooltip="Projekt erstellen">P</a></li>
-        <li><a href="#newTicket" class="btn-floating red tooltipped modal-trigger" data-position="left" data-delay="50" data-tooltip="Ticket erstellen">T</a></li>
-    </ul>
-</div>
 
-<!-- Modal Structure -->
+<!-- NewTicketModal -->
 <div id="newTicket" class="modal modal-fixed-footer">
     <form action="CreateTicket" method="post">
         <div class="modal-content">

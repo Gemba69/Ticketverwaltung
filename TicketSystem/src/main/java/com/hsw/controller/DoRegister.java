@@ -62,6 +62,7 @@ public class DoRegister extends HttpServlet {
                 
 		if(!(containsUsername(newUser)||containsEmail(newUser))){
 			EntityManagerUtil.persistInstance(newUser);
+			EntityManagerFactoryUtil.refreshUserList(request.getServletContext());
 			response.sendRedirect("home?view=self");
 		} else {
 			request.setAttribute("failwarning", true);

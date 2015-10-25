@@ -11,15 +11,16 @@ package com.hsw.controller;
  */
 public enum TitleString {
 
-    SELF("Meine Tickets"), ALL("Alle Tickets"), OPEN("Offene Tickets"), CLOSED("Geschlossene Tickets"), INWORK("In Bearbeitung"),
-    SELFOPEN("Meine offenen Tickets"), SELFCLOSED("Meine geschlossenen Tickets"), SELFINWORK("Meine Tickets in Bearbeitung");
-    private final String title;
+	SELF("Meine Tickets"), ALL("Alle Tickets"), OPEN("Offene Tickets"), CLOSED("Geschlossene Tickets"), INWORK(
+			"In Bearbeitung"), SELFOPEN("Meine offenen Tickets"), SELFCLOSED("Meine geschlossenen Tickets"), SELFINWORK(
+					"Meine Tickets in Bearbeitung"), PROJECTS("Projekte");
+	private final String title;
 
-    private TitleString(String title) {
-        this.title = title;
-    }
+	private TitleString(String title) {
+		this.title = title;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public String getTitle() {
+		return title;
+	}
 }

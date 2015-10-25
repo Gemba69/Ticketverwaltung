@@ -1,7 +1,8 @@
 package com.hsw.controller;
 
-import com.hsw.controller.EntityManager.EntityManagerFactoryUtil;
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hsw.controller.EntityManager.EntityManagerUtil;
 import com.hsw.model.Project;
-import com.hsw.model.Ticket;
 import com.hsw.model.User;
 
 /**
@@ -30,15 +30,14 @@ public class CreateProject extends HttpServlet {
     }
 
     /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
      * response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String projectName = (String) request.getAttribute("projectName");
-        String projectCode = (String) request.getAttribute("projectCode");
-        String projectDesc = (String) request.getAttribute("projectDesc");
-        User projectOwner = EntityManagerFactoryUtil.createEntityManager().find(User.class, (String) request.getAttribute("projectOwner"));
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	String projectName = request.getParameter("projectName");
+        String projectCode = request.getParameter("projectCode");
+        String projectDesc = request.getParameter("projectDesc");
+        User projectOwner = (User)request.getSession().getAttribute("user");
         Project newProject = new Project();
 
         newProject.setProjectCode(projectCode);
@@ -46,17 +45,12 @@ public class CreateProject extends HttpServlet {
         newProject.setProjectName(projectName);
         newProject.setUser(projectOwner);
         newProject.setProjectCounter(0);
+        
+        ((List<Project>)request.getServletContext().getAttribute("projectList")).add(newProject);
 
         EntityManagerUtil.persistInstance(newProject);
-    }
-
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-     * response)
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        doGet(request, response);
+        
+		response.sendRedirect("home?view=" + request.getSession().getAttribute("lastViewParam"));
     }
 
 }

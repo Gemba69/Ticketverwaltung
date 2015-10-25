@@ -151,4 +151,14 @@ public class User implements java.io.Serializable {
 		this.roles = roles;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof User) {
+			User u = (User)o;
+			if (u.getUsername().equals(this.username)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

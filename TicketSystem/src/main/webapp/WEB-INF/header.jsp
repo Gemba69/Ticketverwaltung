@@ -13,7 +13,7 @@
         <li class="no-padding">
             <ul class="collapsible collapsible-accordion">
                 <li>
-                    <a class="collapsible-header">Tickets<i class="mdi-navigation-arrow-drop-down"></i></a>
+                    <a class="collapsible-header waves-effect waves-teal active">Tickets<i class="mdi-navigation-arrow-drop-down"></i></a>
                     <div class="collapsible-body">
                         <ul>
                             <li><a class="waves-effect waves-light" href="home?view=mine">Meine Tickets</a></li>
@@ -29,15 +29,7 @@
         <li class="no-padding">
             <ul class="collapsible collapsible-accordion">
                 <li>
-                    <a class="collapsible-header">Projekte<i class="mdi-navigation-arrow-drop-down"></i></a>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li><a class="waves-effect waves-light" href="#">Meine Projekte</a></li>
-                            <li><a class="waves-effect waves-light" href="#">Alle Projekte</a></li>
-                            <li><a class="waves-effect waves-light" href="#">Laufende Projekte</a></li>
-                            <li><a class="waves-effect waves-light" href="#">Abgeschlossene Projekte</a></li>
-                        </ul>
-                    </div>
+                    <a href="home?view=projects" class="waves-effect waves-teal active">Projekte</a>
                 </li>
             </ul>
         </li>

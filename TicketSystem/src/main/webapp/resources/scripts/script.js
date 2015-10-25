@@ -1,4 +1,11 @@
-﻿var bolCheckFirstname	= false;
+﻿// !JavaScript für register.jsp und login.jsp!
+//
+// Eingaben werden vom Script vor der Datenbank geprüft. Registrierung erst bei 
+// erlaubten Eingaben möglich (disabled Button)
+//
+// Login erst bei Eingabe in die beiden Felder möglich.
+
+var bolCheckFirstname	= false;
 var bolCheckSurname 	= false;
 var bolCheckUser 		= false;
 var bolCheckEmail 		= false;
@@ -13,8 +20,13 @@ var bolErrorInfoPassword 	= true;
 function checkPasswords(){
 	var p1 = document.getElementById("password").value;
 	var p2 = document.getElementById("confirmPassword").value;
+	var bolPwInput = false;
 	
-	if (p1 !== p2){
+	if (p1 == null || p1 == ""){
+		bolPwInput = true;
+	}
+	
+	if (p1 !== p2 || bolPwInput){
 		bolCheckPassword = false;
 		bolErrorInfoPassword = false;
 		document.getElementById("registerButton").disabled = true;
@@ -124,19 +136,7 @@ function checkNecessaryInput(){
 	if (bolCheckUser && bolCheckEmail && bolCheckPassword && bolCheckFirstname && bolCheckSurname){
 		document.getElementById("registerButton").disabled = false;
 		document.getElementById("registerButton").classList.remove("disabled");
-		document.getElementById("hideElementId").hidden = true;
 	} else {
 		document.getElementById("registerButton").disabled = true;
-	}
-}
-
-function checkNecessaryLoginInput(){
-	var p1 = document.getElementById("loginUser").value;
-	var p2 = document.getElementById("loginPassword").value;
-	
-	if (p1 !== "" && p2 !== ""){
-		document.getElementById("loginSubmit").disabled = false;
-	} else {
-		document.getElementById("loginSubmit").disabled = true;
 	}
 }

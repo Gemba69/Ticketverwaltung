@@ -1,9 +1,9 @@
 package com.hsw.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,46 +32,45 @@ public class CreateTicket extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ticketName = request.getParameter("ticketName");
-		String project_code = request.getParameter("projectCode");
-		String beschreibung = request.getParameter("description");
-		String statusString = request.getParameter("statusType");
+		String projectCode = request.getParameter("projectCode");
+		String description = request.getParameter("description");
+		String statusString = "open";
 		String priorityString = request.getParameter("priority");
 		//TODO
-		User ticket_issuer = (User) request.getSession().getAttribute("user");
+		User ticketAuthor = (User) request.getSession().getAttribute("user");
 		
 		EntityManager em = EntityManagerFactoryUtil.createEntityManager();
 		
 		
 		StatusTyp ticketStatus = em.find(StatusTyp.class, statusString);
-		Project project = em.find(Project.class, project_code);
+		Project project = null;
+		for (Project p : (List<Project>)request.getServletContext().getAttribute("projectList")) {
+			if (p.getProjectCode().equals(projectCode)) {
+				project = p;
+			}
+		}
 		int counter = project.getProjectCounter() + 1;
 		int priority = Integer.parseInt(priorityString);
 		TicketId id = new TicketId(project.getProjectCode(), counter);
 		
 		
-		Ticket newTicket = new Ticket(id, project, ticketStatus, ticket_issuer, ticketName, priority);
-		
+		Ticket newTicket = new Ticket(id, project, ticketStatus, ticketAuthor, ticketName, priority);
+		newTicket.setTicketDesc(description);
 		EntityManagerUtil.persistInstance(newTicket);
-		project.setProjectCounter(counter);
-		em.flush();
+
 		
+		em.getTransaction().begin();
+		project.setProjectCounter(counter);
+		//project.getTickets().add(newTicket);
+		em.getTransaction().commit();
+		EntityManagerFactoryUtil.refreshProjectList(request.getServletContext());		
 		
 		response.sendRedirect("home");
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

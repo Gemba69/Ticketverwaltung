@@ -51,7 +51,7 @@
 									<button id="registerButton" class="btn blue disabled" type="submit" name="action" disabled>Registrieren
 										<i class="material-icons right">send</i>
 									</button>
-									<a href="/TicketSystem/home.jsp" class="btn green right" type="submit" name="action"> Zum Login</a>											
+									<a href="/TicketSystem/home?view=self" class="btn green right" type="submit" name="action"> Zum Login</a>											
 												
 							</div>
 						</div>

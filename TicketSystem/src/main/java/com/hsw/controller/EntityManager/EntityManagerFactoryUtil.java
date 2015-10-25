@@ -1,11 +1,19 @@
 package com.hsw.controller.EntityManager;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+
+import com.hsw.model.Project;
+import com.hsw.model.StatusTyp;
+import com.hsw.model.Ticket;
+import com.hsw.model.User;
 
 @WebListener
 public class EntityManagerFactoryUtil implements ServletContextListener {
@@ -15,6 +23,9 @@ public class EntityManagerFactoryUtil implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent event) {
         emf = Persistence.createEntityManagerFactory("ticketsystem");
+        refreshProjectList(event.getServletContext());
+        refreshStatusList(event.getServletContext());
+        refreshUserList(event.getServletContext());
     }
 
     @Override
@@ -28,6 +39,30 @@ public class EntityManagerFactoryUtil implements ServletContextListener {
         }
 
         return emf.createEntityManager();
+    }
+    
+    public static void refreshProjectList(ServletContext c) {
+    	EntityManager em = createEntityManager();
+    	List<Project> projects = em.createQuery("SELECT p FROM Project p", Project.class).getResultList();
+    	System.out.println("refreshProjectList aufgerufen");
+    	for (Project p : projects) {
+    		for (Ticket t : p.getTickets()) {
+    			System.out.println(t.getId() + " " + t.getTicketName());
+    		}
+    	}
+    	c.setAttribute("projectList", projects);
+    }
+    
+    public static void refreshUserList(ServletContext c) {
+    	EntityManager em = createEntityManager();
+    	List<User> users = em.createQuery("SELECT u FROM User u", User.class).getResultList();
+    	c.setAttribute("users", users);
+    }
+    
+    public static void refreshStatusList(ServletContext c) {
+    	EntityManager em = createEntityManager();
+    	List<StatusTyp> stati = em.createQuery("SELECT s FROM StatusTyp s", StatusTyp.class).getResultList();
+    	c.setAttribute("statusTypes", stati);
     }
 
 }

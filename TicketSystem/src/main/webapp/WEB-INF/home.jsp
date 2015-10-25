@@ -26,7 +26,7 @@
                                 <table class="striped">
                                     <thead>
                                     <th>TicketNr</th>
-                                    <th>ProjektNr</th>
+                                    <th>Projektkürzel</th>
                                     <th>Thema</th>
                                     <th>Status</th>
                                     <th>Bearbeiter</th>
@@ -42,40 +42,100 @@
                                                     <table>
                                                         <tbody>
                                                             <tr>
-                                                                <td>${ticket.ticketId}</td>
-                                                                <td>${project.projectId}</td>
+                                                                <td>${ticket.id.ticketId}</td>
+                                                                <td>${project.projectCode}</td>
                                                                 <td>${ticket.ticketName}</td>
-                                                                <td>${ticket.ticketStatus.status}</td>
-                                                                <td>${ticket.ticketIssuer.firstName} ${ticket.ticketIssuer.lastName}</td>
-                                                                <td>${ticket.ticketAuthor.firstName} ${ticket.ticketAuthor.lastName} </td>
-                                                                <td>${ticket.ticketPrio}</td>
+                                                                <td>${ticket.statusTyp.status}</td>
+                                                                <td>${ticket.userByTicketIssuer.vorname} ${ticket.userByTicketIssuer.nachname}</td>
+                                                                <td>${ticket.userByTicketAuthor.vorname} ${ticket.userByTicketAuthor.nachname} </td>
+                                                                <td>${ticket.ticketPriorität}</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <div class="collapsible-body">
+                                                <div class="collapsible-body grey darken-2 white-text">
                                                     <div class="row">
                                                         <div class="col s5 offset-s1">
-                                                            <ul>
-                                                                <li><span class="prop-header blue-text">TicketNr</span><span class="right">${ticket.ticketId}</span></li>
-                                                                <li><span class="prop-header blue-text">Thema</span><span class="right">${ticket.ticketName}</span></li>
-                                                                <li><span class="prop-header blue-text">Status</span><span class="right">${ticket.ticketStatus.status}</span></li>
-                                                                <li><span class="prop-header blue-text">Autor</span><span class="right">${ticket.ticketAuthor.firstName} ${ticket.ticketAuthor.lastName}</span></li>
-                                                                <li><span class="prop-header blue-text">Bearbeiter</span><span class="right">${ticket.ticketIssuer.firstName} ${ticket.ticketIssuer.lastName}</span></li>
-                                                                <li><span class="prop-header blue-text">Priorität</span><span class="right">${ticket.ticketPrio}</span></li>
-                                                            </ul>
+                                                            <table class="bordered">
+                                                            <tbody>
+                                                                <tr><td><span class="prop-header blue-text">TicketNr</span></td><td><span class="right">${ticket.id.ticketId}</span></td></tr>
+                                                                <tr><td><span class="prop-header blue-text">Thema</span></td><td><span class="right">${ticket.ticketName}</span></td></tr>
+                                                                <tr>
+                                                                	<td>
+                                                               			<span class="prop-header blue-text">Status</span>
+                                                             		</td>
+                                                             		<td>
+                                                             		 <div class="input-field">
+																	    <select>
+																	      <option value="${ticket.statusTyp.status}" selected>${ticket.statusTyp.status}</option>
+																	      <c:forEach items="${applicationScope.statusTypes}" var="st">
+																	      	<c:if test="${st.status != ticket.statusTyp.status}">
+																	      		<option value="${st.status}">${st.status}</option>
+																	      	</c:if>
+																	      </c:forEach>
+																	    </select>	
+																	  </div>
+                                                            		</td>
+                                                            	</tr>
+                                                                <tr><td><span class="prop-header blue-text">Autor</span></td><td><span class="right">${ticket.userByTicketAuthor.vorname} ${ticket.userByTicketAuthor.nachname}</span></td></tr>
+                                                                <tr>
+                                                                	<td>
+                                                                		<span class="prop-header blue-text">Bearbeiter</span>
+                                                               		</td>
+                                                              		<td>
+                                                              		 	<div class="input-field">
+																	    	<select>
+																	    		<option value="${ticket.userByTicketIssuer.username}" selected>${ticket.userByTicketIssuer.vorname} ${ticket.userByTicketIssuer.nachname}</option>
+																    			<c:forEach items="${applicationScope.users}" var="user">
+																    				<option value="${user.username}">${user.vorname} ${user.nachname}</option>
+																    			</c:forEach>
+																	    	</select>	
+																	 	 </div>
+                                                           			</td>
+                                                       			</tr>
+                                                                <tr>
+                                                                	<td>
+                                                                		<span class="prop-header blue-text">Priorität</span>
+                                                               		</td>
+                                                         			<td>
+                                                         				<div class="input-field">
+																	    	<select>
+																    			<c:forEach var="counter" begin="1" end="5">
+																    				<c:choose>
+																    					<c:when test="${ticket.ticketPriorität != counter}">
+																    						<option value="${counter}">${counter}</option>
+																    					</c:when>
+																    					<c:otherwise>
+ 																					    	<option value="${counter}" selected>${counter}</option>
+																    					</c:otherwise>
+																    				</c:choose>
+																    			</c:forEach>
+																	    	</select>	
+																	 	 </div>
+                                                       				</td>
+                                                   				</tr>
+																<tr><td><span class="prop-header blue-text">Beschreibung</span></td><td><span class="right">${ticket.ticketDesc}</span></td></tr>
+															</tbody>
+															</table>
+															<div class="input-field col s7 offset-s6">
+																<a href="#" class="waves-effect waves-light btn blue"><i class="material-icons left">save</i>Speichern</a>															
+															</div>
+
                                                         </div>
                                                         <div class="col s5">
                                                             <c:forEach items="${ticket.comments}" var="comm">
                                                                 <div class="card-panel col s12 blue darken-3 white-text">
                                                                     ${comm.comment}<br>
-                                                                    <span class="comment-author orange-text">${comm.commentIssuer.firstName} ${comm.commentIssuer.lastName}</span>
+                                                                    <span class="comment-author orange-text">${comm.user.vorname} ${comm.user.nachname}</span>
                                                                 </div>
                                                             </c:forEach>
-                                                            <div class="input-field col s12">
-                                                                <textarea id="commentfield" class="materialize-textarea"></textarea>
-                                                                <label for="commentfield">Kommentar schreiben</label>
-                                                            </div>
+                                                            <form action="PostComment">
+	                                                            <div class="input-field col s12">
+	                                                                <textarea id="commentfield" class="materialize-textarea"></textarea>
+	                                                                <label for="commentfield">Kommentar schreiben</label>
+	                                                            </div>
+	                                                            <input type="submit" class="btn blue" value="Kommentar abschicken">
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>

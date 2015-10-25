@@ -10,7 +10,7 @@
 
 <!-- Modal Structure -->
 <div id="newTicket" class="modal modal-fixed-footer">
-    <form action="createTicket" method="post">
+    <form action="CreateTicket" method="post">
         <div class="modal-content">
             <h4>Neues Ticket erstellen</h4>
             <div class="row">
@@ -19,7 +19,7 @@
                     <select name="projectCode">
                         <option value="" disabled selected>Bitte auswählen</option>
                         <c:forEach items="${applicationScope.projectList}" var="project">
-                            <option value="${project.projectId}">${project.projectName}</option>
+                            <option value="${project.projectCode}">${project.projectName}</option>
                         </c:forEach>
                     </select>
                     <label>Projekt</label>

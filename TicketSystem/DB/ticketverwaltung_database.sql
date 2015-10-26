@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `ticketverwaltung`
 --
-Drop User ticket_user@localhost;
-Drop database ticketverwaltung;
 Create database ticketverwaltung;
 
 Use ticketverwaltung;

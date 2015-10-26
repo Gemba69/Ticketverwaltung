@@ -21,10 +21,11 @@ public class EntityManagerFactoryUtil implements ServletContextListener {
     private static EntityManagerFactory emf;
 
     @Override
-    public void contextInitialized(ServletContextEvent event) {
-        DatabaseTester databaseTester = new DatabaseTester();
+    public void contextInitialized (ServletContextEvent event) {
+        DatabaseTester databaseTester = new DatabaseTester();    
         if(!databaseTester.databaseExsists("ticketverwaltung")){
-            databaseTester.create("ticketverwaltung");
+            databaseTester.create("ticketverwaltung_database.sql");
+            databaseTester.create("Testdata.sql");
         }
         emf = Persistence.createEntityManagerFactory("ticketsystem");
         refreshProjectList(event.getServletContext());

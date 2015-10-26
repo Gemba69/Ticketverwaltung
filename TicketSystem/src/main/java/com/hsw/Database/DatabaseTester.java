@@ -52,15 +52,13 @@ public class DatabaseTester {
     }
 
     public boolean databaseExsists(String name) {
+        Connection conn = makeConnection();
+        Statement stmt;
         try {
-            Connection conn = makeConnection();
-            Statement stmt;
-
             stmt = conn.createStatement();
             String sql;
             sql = "SHOW DATABASES";
             ResultSet rs = stmt.executeQuery(sql);
-
             while (rs.next()) {
                 if (rs.getString(1).equals(name)) {
                     rs.close();
@@ -70,14 +68,12 @@ public class DatabaseTester {
                     return true;
                 }
             }
-            rs.close();
-            stmt.close();
-            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseTester.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("Nicht Gefunden");
         return false;
+
     }
 
     public void create(String name) {
@@ -85,9 +81,10 @@ public class DatabaseTester {
         Statement stmt;
         try {
             stmt = conn.createStatement();
-            URL url = this.getClass().getResource("/ticketverwaltung_database.sql");
+            ClassLoader classLoader = getClass().getClassLoader();
+            File file = new File(classLoader.getResource("Database/" + name).getFile());
             //URL url = new URL("File:\\C:\\Users\\simon\\Documents\\NetBeansProjects\\Ticketverwaltung\\TicketSystem\\DB\\ticketverwaltung_database.sql");
-            String[] sql = readData(url).split(";");
+            String[] sql = readData(file).split(";");
             for (int i = 0; i < sql.length; i++) {
                 System.out.println(sql[i]);
                 stmt.execute(sql[i]);
@@ -99,12 +96,12 @@ public class DatabaseTester {
         }
     }
 
-    private String readData(URL url) {
+    private String readData(File file) {
         FileReader fr;
         BufferedReader br;
         String ret = "";
         try {
-            fr = new FileReader(new File(url.toURI()));
+            fr = new FileReader(file);
             br = new BufferedReader(fr);
 
             String zeile;
@@ -117,10 +114,8 @@ public class DatabaseTester {
 
             fr.close();
         } catch (IOException e) {
-            System.out.println("Fehler beim Lesen der Datei " + url);
+            System.out.println("Fehler beim Lesen der Datei " + file.getName());
             System.out.println(e.toString());
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(DatabaseTester.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ret;
     }

@@ -20,7 +20,6 @@ SET time_zone = "+00:00";
 -- Datenbank: `ticketverwaltung`
 --
 Create database ticketverwaltung;
-
 Use ticketverwaltung;
 -- --------------------------------------------------------
 
@@ -204,7 +203,7 @@ Insert Into Status_Typ (Status, Status_Desc) VALUES ('offen', 'Status für offen
 Insert Into Status_Typ (Status, Status_Desc) VALUES ('in Arbeit', 'Status für Ticket in Bearbeitung');
 Insert Into Status_Typ (Status, Status_Desc) VALUES ('geschlossen', 'Status für fertige Tickets');
 
-Insert Into User (Username, Passwort, Email) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@web.de');
+Insert Into User (Username, Passwort, Email, Vorname, Nachname) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@web.de', 'Arthur', 'Administrator');
 Insert Into User_Role (Username, Role_Name) VALUES ('admin', 'admin');
 
 --
@@ -214,7 +213,7 @@ CREATE USER ticket_user@localhost;
 SET password for ticket_user@localhost = password('admin123');
 GRANT Select, Insert, Update on ticketverwaltung.* to ticket_user@localhost;
 
-
+Commit;
 --
 -- Daten Benutzer
 --

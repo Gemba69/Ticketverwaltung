@@ -9,8 +9,9 @@ header, main, footer, .page-title {
 }
 
 body {
-    background-image: url('../crap/background.jpg');
-    background-size: cover;
+    /*background-image: url('../crap/background.jpg');
+    background-size: cover;*/
+    background-color: #444;
 }
 
 nav {

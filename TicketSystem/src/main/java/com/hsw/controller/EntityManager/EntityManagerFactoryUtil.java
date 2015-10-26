@@ -1,6 +1,5 @@
 package com.hsw.controller.EntityManager;
 
-import com.hsw.Database.DatabaseTester;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,9 +10,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import com.hsw.Database.DatabaseTester;
 import com.hsw.model.Project;
 import com.hsw.model.StatusTyp;
-import com.hsw.model.Ticket;
 import com.hsw.model.User;
 
 @WebListener
@@ -32,6 +31,7 @@ public class EntityManagerFactoryUtil implements ServletContextListener {
         refreshStatusList(event.getServletContext());
         refreshUserList(event.getServletContext());
     }
+
 
     @Override
     public void contextDestroyed(ServletContextEvent event) {

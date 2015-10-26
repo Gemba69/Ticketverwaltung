@@ -33,7 +33,7 @@
                 </li>
             </ul>
         </li>
-        <li><a class="waves-effect waves-light red-text" href="logout">Logout</a></li>
+        <li><a class="waves-effect waves-light red-text" href="logout"><i class="material-icons left">input</i>Logout</a></li>
     </ul>
 </ul>
 </nav>

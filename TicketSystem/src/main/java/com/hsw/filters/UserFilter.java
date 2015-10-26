@@ -39,6 +39,7 @@ public class UserFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		request.setCharacterEncoding("UTF-8");
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		if (httpRequest.getSession(false).getAttribute("user") == null) {
 			EntityManager em = EntityManagerFactoryUtil.createEntityManager();

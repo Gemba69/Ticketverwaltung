@@ -25,6 +25,11 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "HomeServlet", urlPatterns = { "/home" })
 public class HomeServlet extends HttpServlet {
 
+	private final static String OPEN_STATUS = "offen";
+	private final static String CLOSED_STATUS = "geschlossen";
+	private final static String IN_WORK_STATUS = "in Arbeit";
+
+	
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
 	 * methods.
@@ -71,7 +76,7 @@ public class HomeServlet extends HttpServlet {
 		case "close":
 			title = TitleString.CLOSED;
 			break;
-		case "in work":
+		case "inwork":
 			title = TitleString.INWORK;
 			break;
 		case "selfopen":
@@ -104,16 +109,16 @@ public class HomeServlet extends HttpServlet {
 					for (Ticket t : p.getTickets()) {
 						if (t.getUserByTicketIssuer() != null && t.getUserByTicketIssuer().equals(user)
 								&& title == TitleString.SELF
-								|| t.getUserByTicketIssuer() != null && t.getStatusTyp().getStatus().equals("open")
+								|| t.getUserByTicketIssuer() != null && t.getStatusTyp().getStatus().equals(OPEN_STATUS) //TODO: hardcoding entfernen
 										&& t.getUserByTicketIssuer().equals(user) && title == TitleString.SELFOPEN
-								|| t.getUserByTicketIssuer() != null && t.getStatusTyp().getStatus().equals("done")
+								|| t.getUserByTicketIssuer() != null && t.getStatusTyp().getStatus().equals(CLOSED_STATUS)
 										&& t.getUserByTicketIssuer().equals(user) && title == TitleString.SELFCLOSED
-								|| t.getUserByTicketIssuer() != null && t.getStatusTyp().getStatus().equals("in work")
+								|| t.getUserByTicketIssuer() != null && t.getStatusTyp().getStatus().equals(IN_WORK_STATUS)
 										&& t.getUserByTicketIssuer().equals(user) && title == TitleString.SELFINWORK
 								|| title == TitleString.ALL
-								|| t.getStatusTyp().getStatus().equals("open") && title == TitleString.OPEN
-								|| t.getStatusTyp().getStatus().equals("done") && title == TitleString.CLOSED
-								|| t.getStatusTyp().getStatus().equals("in work") && title == TitleString.INWORK) {
+								|| t.getStatusTyp().getStatus().equals(OPEN_STATUS) && title == TitleString.OPEN 
+								|| t.getStatusTyp().getStatus().equals(CLOSED_STATUS) && title == TitleString.CLOSED
+								|| t.getStatusTyp().getStatus().equals(IN_WORK_STATUS) && title == TitleString.INWORK) {
 							returnTickets.add(t);
 						}
 					}

@@ -1,7 +1,7 @@
 
 <!-- NewTicketModal -->
 <div id="newTicket" class="modal modal-fixed-footer">
-    <form action="CreateTicket" method="post">
+    <form action="CreateTicket" method="post" accept-charset="UTF-8">
         <div class="modal-content">
             <h4>Neues Ticket erstellen</h4>
             <div class="row">

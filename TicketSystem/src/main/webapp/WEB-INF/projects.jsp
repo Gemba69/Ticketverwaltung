@@ -33,15 +33,14 @@
 							</thead>
 							<tbody>
 								<c:forEach items="${requestScope.projectList}" var="project">
-									<tr class="modal-trigger" href="#modal${project.projectCode}">
-										<td>${project.projectCode}</td>
-										<td>${project.projectName}</td>
-										<td>${project.user.vorname}${project.user.nachname}</td>
+									<tr>
+										<td class="modal-trigger" href="#modal${project.projectCode}">${project.projectCode}</td>
+										<td class="modal-trigger" href="#modal${project.projectCode}">${project.projectName}</td>
+										<td class="modal-trigger" href="#modal${project.projectCode}">${project.user.vorname}${project.user.nachname}</td>
 										<td><a
 											href="home?view=all&project=${project.projectCode}"
 											class="btn waves-effect waves-ligh"><i
-												class="material-icons left">trending_flat</i>Alle Tickets
-												anzeigen</a></td>
+												class="material-icons left">trending_flat</i>Tickets</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -55,7 +54,7 @@
 	<!-- Modals für die Detailansicht -->
 	<c:forEach items="${requestScope.projectList}" var="project">
 		<div id="modal${project.projectCode}" class="modal">
-			<div class="modal-content blue-grey darken-2 white-text">
+			<div class="modal-content">
 				<div class="row">
 					<div class="col s5 offset-s1">
 						<input type="hidden" name="ticketId" value="${ticket.id.ticketId}">

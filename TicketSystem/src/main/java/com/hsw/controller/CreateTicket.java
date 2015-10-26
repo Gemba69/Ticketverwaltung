@@ -39,7 +39,7 @@ public class CreateTicket extends HttpServlet {
 		String ticketName = request.getParameter("ticketName");
 		String projectCode = request.getParameter("projectCode");
 		String description = request.getParameter("description");
-		String statusString = "open";
+		String statusString = "offen"; //TODO: hard coding entfernen
 		String priorityString = request.getParameter("priority");
 		User ticketAuthor = (User) request.getSession().getAttribute("user");
 		
@@ -59,7 +59,7 @@ public class CreateTicket extends HttpServlet {
 
 		EntityManagerUtil.persistInstance(newTicket);
 
-		
+		System.out.println(newTicket.getTicketName());
 		em.getTransaction().begin();
 		project.setProjectCounter(counter);
 		project.getTickets().add(newTicket);

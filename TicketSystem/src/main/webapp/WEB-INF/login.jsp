@@ -29,10 +29,12 @@
                                     <input id="j_password" name="j_password" type="password" class="validate" />
                                     <label for="j_password">Passwort</label>
                                 </div>
-                                <button class="btn waves-effect waves-light blue center-align" type="submit" name="action">Login
+                            </div>
+                            <div class="card-action">
+                              <button class="btn waves-effect waves-light blue center-align" type="submit" name="action">Login
                                     <i class="material-icons right">send</i>
                                 </button>
-                                <a href="/TicketSystem/register.jsp" class="btn waves-effect waves-light green right" type="submit" name="action">Zur Registrierung</a>
+                             	 <a href="/TicketSystem/register.jsp" class="right" type="submit" name="action">Registrieren</a>
                             </div>
                         </div>
                     </div>

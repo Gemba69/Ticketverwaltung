@@ -5,7 +5,8 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,7 @@
 			<div class="col s12">
 				<div class="card">
 					<div class="card-content">
-						<table class="striped">
+						<table id="mainTable" class="striped tablesorter">
 							<thead>
 								<th>TicketNr</th>
 								<th>Projektkürzel</th>
@@ -62,10 +63,10 @@
 		<c:forEach items="${project.tickets}" var="ticket">
 			<div id="modal${project.projectCode}${ticket.id.ticketId}"
 				class="modal">
-				<div class="modal-content blue-grey darken-2 white-text">
+				<div class="modal-content">
 					<div class="row">
 						<div class="col s5 offset-s1">
-							<form action="ModifyTicket" method="post">
+							<form action="ModifyTicket" method="post" accept-charset="UTF-8">
 								<input type="hidden" name="ticketId"
 									value="${ticket.id.ticketId}"> <input type="hidden"
 									name="projectCode" value="${project.projectCode}">
@@ -157,7 +158,7 @@
 								</div>
 							</c:forEach>
 							<!-- TODO: AJAX  -->
-							<form action="PostComment" method="post">
+							<form action="PostComment" method="post" accept-charset="UTF-8">
 								<input type="hidden" name="ticketId"
 									value="${ticket.id.ticketId}"> <input type="hidden"
 									name="projectCode" value="${project.projectCode}">

@@ -1,7 +1,7 @@
 
 <!-- NewProjectModal -->
 <div id="newProject" class="modal modal-fixed-footer">
-    <form action="CreateProject" method="post">
+    <form action="CreateProject" method="post" accept-charset="UTF-8">
         <div class="modal-content">
             <h4>Neues Projekt erstellen</h4>
             <div class="row">

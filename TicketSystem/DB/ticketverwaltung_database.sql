@@ -83,7 +83,7 @@ CREATE TABLE project (
 project_code varchar(5) NOT NULL,
   project_name varchar(40) NOT NULL,
   project_owner varchar(40) NOT NULL, -- REFERENCES User (username) ON DELETE CASCADE,
-  project_desc varchar(40),
+  project_desc varchar(2500),
   project_counter int(11) NOT NULL,
   PRIMARY KEY (project_code),
   UNIQUE KEY UNIQUE_PROJECT_NAME (project_Name)
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `Ticket_Name` varchar(40) NOT NULL,
   `Ticket_Issuer` varchar(40),
   `Ticket_Author` varchar(40) NOT NULL,
-  `Ticket_Desc` varchar(800),
+  `Ticket_Desc` varchar(2500),
   `Ticket_Status` varchar(20) NOT NULL,
   `Ticket_Priorität` int(1) NOT NULL,
   PRIMARY KEY (`Project_Code`, `Ticket_ID`)
@@ -144,7 +144,7 @@ ALTER TABLE ticket
 	
 CREATE TABLE IF NOT EXISTS `Comment` (
 `Comment_ID` int(11) NOT NULL AUTO_INCREMENT,
-`Comment` varchar(200) NOT NULL,
+`Comment` varchar(2500) NOT NULL,
   `Comment_Issuer` varchar(40),
   `Ticket_ID` int(15) NOT NULL,
   Project_Code varchar(5),
@@ -202,9 +202,9 @@ ALTER TABLE Ticket_Tag
 Insert Into Role (Role_Name, Role_Desc) VALUES ('admin', 'Administrator mit allen Rechten');
 Insert Into Role (Role_Name, Role_Desc) VALUES ('member', 'normaler Benutzer mit eingeschraenkten Rechten');
 
-Insert Into Status_Typ (Status, Status_Desc) VALUES ('open', 'Status für offene Tickets');
-Insert Into Status_Typ (Status, Status_Desc) VALUES ('in work', 'Status für Ticket in Bearbeitung');
-Insert Into Status_Typ (Status, Status_Desc) VALUES ('done', 'Status für fertige Tickets');
+Insert Into Status_Typ (Status, Status_Desc) VALUES ('offen', 'Status für offene Tickets');
+Insert Into Status_Typ (Status, Status_Desc) VALUES ('in Arbeit', 'Status für Ticket in Bearbeitung');
+Insert Into Status_Typ (Status, Status_Desc) VALUES ('geschlossen', 'Status für fertige Tickets');
 
 Insert Into User (Username, Passwort, Email) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@web.de');
 Insert Into User_Role (Username, Role_Name) VALUES ('admin', 'admin');

@@ -1,5 +1,6 @@
 package com.hsw.controller.EntityManager;
 
+import com.hsw.Database.DatabaseTester;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -22,6 +23,10 @@ public class EntityManagerFactoryUtil implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
+        DatabaseTester databaseTester = new DatabaseTester();
+        if(!databaseTester.databaseExsists("ticketverwaltung")){
+            databaseTester.create("ticketverwaltung");
+        }
         emf = Persistence.createEntityManagerFactory("ticketsystem");
         refreshProjectList(event.getServletContext());
         refreshStatusList(event.getServletContext());

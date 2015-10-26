@@ -29,13 +29,19 @@
 								<th>Projektkürzel</th>
 								<th>Projektname</th>
 								<th>Projektleiter</th>
+								<th></th>
 							</thead>
 							<tbody>
 								<c:forEach items="${requestScope.projectList}" var="project">
 									<tr class="modal-trigger" href="#modal${project.projectCode}">
 										<td>${project.projectCode}</td>
 										<td>${project.projectName}</td>
-										<td>${project.user.vorname} ${project.user.nachname}</td>
+										<td>${project.user.vorname}${project.user.nachname}</td>
+										<td><a
+											href="home?view=all&project=${project.projectCode}"
+											class="btn waves-effect waves-ligh"><i
+												class="material-icons left">trending_flat</i>Alle Tickets
+												anzeigen</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -67,7 +73,8 @@
 								</tr>
 								<tr>
 									<td><span class="prop-header blue-text">Projektleiter</span></td>
-									<td><span class="right">${project.user.vorname} ${project.user.nachname}</span></td>
+									<td><span class="right">${project.user.vorname}
+											${project.user.nachname}</span></td>
 								</tr>
 								<tr>
 									<td><span class="prop-header blue-text">Beschreibung</span></td>
@@ -80,50 +87,44 @@
 						<table class="bordered">
 							<tbody>
 								<tr>
-									<td>
-										<span class="prop-header blue-text">Offene Tickets</span>
-									</td>
-									<td>
-										<c:forEach items="${project.tickets}" var="ticket">
+									<td><span class="prop-header blue-text">Offene
+											Tickets</span></td>
+									<td><c:forEach items="${project.tickets}" var="ticket">
 											<c:if test="${ticket.statusTyp.status=='open'}">
-												<span class="right">${ticket.ticketName}</span><br>
+												<span class="right">${ticket.ticketName}</span>
+												<br>
 											</c:if>
-										</c:forEach>
-									</td>
+										</c:forEach></td>
 								</tr>
 								<tr>
-									<td>
-										<span class="prop-header blue-text">Tickets in Bearbeitung</span>
-									</td>
-									<td>
-										<c:forEach items="${project.tickets}" var="ticket">
+									<td><span class="prop-header blue-text">Tickets in
+											Bearbeitung</span></td>
+									<td><c:forEach items="${project.tickets}" var="ticket">
 											<c:if test="${ticket.statusTyp.status=='in work'}">
-												<span class="right">${ticket.ticketName}</span><br>
+												<span class="right">${ticket.ticketName}</span>
+												<br>
 											</c:if>
-										</c:forEach>
-									</td>
+										</c:forEach></td>
 								</tr>
 								<tr>
-									<td>
-										<span class="prop-header blue-text">Geschlossene Tickets</span>
-									</td>
-									<td>
-										<c:forEach items="${project.tickets}" var="ticket">
+									<td><span class="prop-header blue-text">Geschlossene
+											Tickets</span></td>
+									<td><c:forEach items="${project.tickets}" var="ticket">
 											<c:if test="${ticket.statusTyp.status=='done'}">
-												<span class="right">${ticket.ticketName}</span><br>
+												<span class="right">${ticket.ticketName}</span>
+												<br>
 											</c:if>
-										</c:forEach>
-									</td>
+										</c:forEach></td>
 								</tr>
 							</tbody>
 						</table>
-						</div>
-						</div>
-						</div>
-						</div>
-						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
 	</c:forEach>
-	<%@include file="createModalsAndButtons.jsp" %>
+	<%@include file="createModalsAndButtons.jsp"%>
 	<%@include file="scripts.jsp"%>
 </body>
 </html>

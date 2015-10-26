@@ -10,9 +10,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import com.hsw.Database.DatabaseTester;
 import com.hsw.model.Project;
 import com.hsw.model.StatusTyp;
-import com.hsw.model.Ticket;
 import com.hsw.model.User;
 
 @WebListener
@@ -22,11 +22,17 @@ public class EntityManagerFactoryUtil implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
+        DatabaseTester databaseTester = new DatabaseTester();
+        if(!databaseTester.databaseExsists("ticketverwaltung")){
+            databaseTester.create("ticketverwaltung");
+        }
         emf = Persistence.createEntityManagerFactory("ticketsystem");
         refreshProjectList(event.getServletContext());
         refreshStatusList(event.getServletContext());
         refreshUserList(event.getServletContext());
     }
+
+
 
     @Override
     public void contextDestroyed(ServletContextEvent event) {

@@ -40,8 +40,13 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		TitleString title = null;
+		// Herr Mertens, wundern sie sich nicht: Diese Methode ist in eine
+		// Monstrosität mutiert. Sie hat klein, elegant und schön
+		// angefangen, doch nun ist sie das Grauen der Menschheit. Die Magic hat
+		// sie in invertiertes Alpecin verwandelt. Doping nicht für Haare. Nur
+		// nicht für die Haare.
 
+		TitleString title = null;
 		ServletContext sc = request.getServletContext();
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
@@ -84,26 +89,33 @@ public class HomeServlet extends HttpServlet {
 		default:
 			title = TitleString.SELF;
 		}
-		request.setAttribute("title", title.getTitle());
+
+		String titleAppendix = "";
+		String projectCode = request.getParameter("project");
+		if (projectCode != null)
+			titleAppendix = " von Projekt " + projectCode;
+		request.setAttribute("title", title.getTitle() + titleAppendix);
 
 		if (title != TitleString.PROJECTS) {
 			List<Project> returnProjects = new ArrayList<>();
 			for (Project p : projects) {
 				List<Ticket> returnTickets = new ArrayList<>();
-				for (Ticket t : p.getTickets()) {
-					if (t.getUserByTicketIssuer() != null && t.getUserByTicketIssuer().equals(user)
-							&& title == TitleString.SELF
-							|| t.getUserByTicketIssuer() != null && t.getStatusTyp().getStatus().equals("open")
-									&& t.getUserByTicketIssuer().equals(user) && title == TitleString.SELFOPEN
-							|| t.getUserByTicketIssuer() != null && t.getStatusTyp().getStatus().equals("done")
-									&& t.getUserByTicketIssuer().equals(user) && title == TitleString.SELFCLOSED
-							|| t.getUserByTicketIssuer() != null && t.getStatusTyp().getStatus().equals("in work")
-									&& t.getUserByTicketIssuer().equals(user) && title == TitleString.SELFINWORK
-							|| title == TitleString.ALL
-							|| t.getStatusTyp().getStatus().equals("open") && title == TitleString.OPEN
-							|| t.getStatusTyp().getStatus().equals("done") && title == TitleString.CLOSED
-							|| t.getStatusTyp().getStatus().equals("in work") && title == TitleString.INWORK) {
-						returnTickets.add(t);
+				if (projectCode == null || p.getProjectCode().equals(projectCode)) {
+					for (Ticket t : p.getTickets()) {
+						if (t.getUserByTicketIssuer() != null && t.getUserByTicketIssuer().equals(user)
+								&& title == TitleString.SELF
+								|| t.getUserByTicketIssuer() != null && t.getStatusTyp().getStatus().equals("open")
+										&& t.getUserByTicketIssuer().equals(user) && title == TitleString.SELFOPEN
+								|| t.getUserByTicketIssuer() != null && t.getStatusTyp().getStatus().equals("done")
+										&& t.getUserByTicketIssuer().equals(user) && title == TitleString.SELFCLOSED
+								|| t.getUserByTicketIssuer() != null && t.getStatusTyp().getStatus().equals("in work")
+										&& t.getUserByTicketIssuer().equals(user) && title == TitleString.SELFINWORK
+								|| title == TitleString.ALL
+								|| t.getStatusTyp().getStatus().equals("open") && title == TitleString.OPEN
+								|| t.getStatusTyp().getStatus().equals("done") && title == TitleString.CLOSED
+								|| t.getStatusTyp().getStatus().equals("in work") && title == TitleString.INWORK) {
+							returnTickets.add(t);
+						}
 					}
 				}
 				if (!returnTickets.isEmpty()) {
@@ -122,7 +134,6 @@ public class HomeServlet extends HttpServlet {
 			request.setAttribute("projectList", projects);
 			request.getRequestDispatcher("WEB-INF/projects.jsp").forward(request, response);
 		}
-		
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on

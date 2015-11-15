@@ -20,41 +20,41 @@ VALUES ('DEV', 'Entwicklungsprojekt', 'admin', 'Dies ist ein Entwicklungsprojekt
 Insert Into Project (Project_Code, Project_Name, Project_Owner, Project_Desc, Project_Counter)
 VALUES ('PROD', 'Produktivprojekt', 'bluhn', 'Dies ist ein Produktivprojekt', 0);
 
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('TEST', '1', 'Testticket #1', 'testuser', 'testuser', 'Das erste Ticket', 'offen', 1);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('TEST', '2', 'Testticket #2', 'testuser', 'rmertens', 'Das zweite Ticket', 'in Arbeit', 2);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('TEST', '3', 'Testticket #3', 'rmertens', 'testuser', 'Das dritte Ticket', 'geschlossen', 1);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('TEST', '4', 'Testticket #4', 'bluhn', 'bluhn', 'Das vierte Ticket', 'in Arbeit', 3);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('TEST', '5', 'Testticket #5', 'bluhn', 'bluhn', 'Das fünfte Ticket', 'geschlossen', 4);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('TEST', '6', 'Testticket #6', 'pklabunde', 'pklabunde', 'Das sechste Ticket', 'in Arbeit', 5);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('TEST', '7', 'Testticket #7', 'pklabunde', 'pklabunde', 'Das siebte Ticket', 'geschlossen', 3);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('DEV', '1', 'Entwicklungsticket #1', 'sbruns', 'sbruns', 'Das erste Ticket', 'offen', 4);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('DEV', '2', 'Entwicklungsticket #2', 'sbruns', 'sbruns', 'Das zweite Ticket', 'offen', 2);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('DEV', '3', 'Entwicklungsticket #3', 'jpoeppelmann', 'jpoeppelmann', 'Das dritte Ticket', 'offen', 3);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('DEV', '4', 'Entwicklungsticket #4', 'jpoeppelmann', 'jpoeppelmann', 'Das vierte Ticket', 'offen', 3);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('DEV', '5', 'Entwicklungsticket #5', 'bluhn', 'jpoeppelmann', 'Das fünfte Ticket', 'offen', 1);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('DEV', '6', 'Entwicklungsticket #6', 'pklabunde', 'jpoeppelmann', 'Das erste Ticket', 'offen', 5);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('PROD', '1', 'Produktivticket #1', 'jpoeppelmann', 'bluhn', 'Das erste Ticket', 'offen', 3);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('PROD', '2', 'Produktivticket #2', 'jpoeppelmann', 'sbruns', 'Das zweite Ticket', 'offen', 3);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('PROD', '3', 'Produktivticket #3', 'sbruns', 'bluhn', 'Das dritte Ticket', 'offen', 2);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('PROD', '4', 'Produktivticket #4', 'pklabunde', 'bluhn', 'Das vierte Ticket', 'offen', 5);
-Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Priorität)
+Insert Into Ticket (Project_Code, Ticket_ID, Ticket_Name, Ticket_Issuer, Ticket_Author, Ticket_Desc, Ticket_Status, Ticket_Prioritaet)
 VALUES ('PROD', '5', 'Produktivticket #5', 'bluhn', 'sbruns', 'Das fünfte Ticket', 'offen', 3);
 
 Update Project

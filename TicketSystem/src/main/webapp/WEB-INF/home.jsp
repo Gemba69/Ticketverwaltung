@@ -46,7 +46,7 @@
 												${ticket.userByTicketIssuer.nachname}</td>
 											<td>${ticket.userByTicketAuthor.vorname}
 												${ticket.userByTicketAuthor.nachname}</td>
-											<td>${ticket.ticketPriorität}</td>
+											<td>${ticket.ticketPrioritaet}</td>
 										</tr>
 									</c:forEach>
 								</c:forEach>
@@ -118,13 +118,13 @@
 											</td>
 										</tr>
 										<tr>
-											<td><span class="prop-header blue-text">Priorität</span></td>
+											<td><span class="prop-header blue-text">Prioritaet</span></td>
 											<td>
 												<div class="input-field">
 													<select name="priority">
 														<c:forEach var="counter" begin="1" end="5">
 															<c:choose>
-																<c:when test="${ticket.ticketPriorität != counter}">
+																<c:when test="${ticket.ticketPrioritaet != counter}">
 																	<option value="${counter}">${counter}</option>
 																</c:when>
 																<c:otherwise>

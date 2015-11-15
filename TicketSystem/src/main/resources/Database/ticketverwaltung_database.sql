@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `Ticket_Author` varchar(40) NOT NULL,
   `Ticket_Desc` varchar(2500),
   `Ticket_Status` varchar(20) NOT NULL,
-  `Ticket_Priorität` int(1) NOT NULL,
+  `Ticket_Prioritaet` int(1) NOT NULL,
   PRIMARY KEY (`Project_Code`, `Ticket_ID`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

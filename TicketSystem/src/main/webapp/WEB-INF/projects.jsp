@@ -36,7 +36,7 @@
 									<tr>
 										<td class="modal-trigger" href="#modal${project.projectCode}">${project.projectCode}</td>
 										<td class="modal-trigger" href="#modal${project.projectCode}">${project.projectName}</td>
-										<td class="modal-trigger" href="#modal${project.projectCode}">${project.user.vorname}${project.user.nachname}</td>
+										<td class="modal-trigger" href="#modal${project.projectCode}">${project.user.vorname} ${project.user.nachname}</td>
 										<td><a
 											href="home?view=all&project=${project.projectCode}"
 											class="btn waves-effect waves-ligh"><i

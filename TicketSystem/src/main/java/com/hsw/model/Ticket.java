@@ -28,7 +28,7 @@ public class Ticket implements java.io.Serializable {
 	private User userByTicketAuthor;
 	private String ticketName;
 	private String ticketDesc;
-	private int ticketPriorität;
+	private int ticketPrioritaet;
 	private Set<Comment> comments = new HashSet<Comment>(0);
 	private Set<TicketTag> ticketTags = new HashSet<TicketTag>(0);
 
@@ -42,7 +42,7 @@ public class Ticket implements java.io.Serializable {
 		this.statusTyp = statusTyp;
 		this.userByTicketAuthor = userByTicketAuthor;
 		this.ticketName = ticketName;
-		this.ticketPriorität = ticketPriorität;
+		this.ticketPrioritaet = ticketPriorität;
 	}
 
 	public Ticket(TicketId id, Project project, StatusTyp statusTyp, User userByTicketIssuer, User userByTicketAuthor,
@@ -55,7 +55,7 @@ public class Ticket implements java.io.Serializable {
 		this.userByTicketAuthor = userByTicketAuthor;
 		this.ticketName = ticketName;
 		this.ticketDesc = ticketDesc;
-		this.ticketPriorität = ticketPriorität;
+		this.ticketPrioritaet = ticketPriorität;
 		this.comments = comments;
 		this.ticketTags = ticketTags;
 	}
@@ -131,13 +131,13 @@ public class Ticket implements java.io.Serializable {
 		this.ticketDesc = ticketDesc;
 	}
 
-	@Column(name = "Ticket_Priorität", nullable = false)
-	public int getTicketPriorität() {
-		return this.ticketPriorität;
+	@Column(name = "Ticket_Prioritaet", nullable = false)
+	public int getTicketPrioritaet() {
+		return this.ticketPrioritaet;
 	}
 
-	public void setTicketPriorität(int ticketPriorität) {
-		this.ticketPriorität = ticketPriorität;
+	public void setTicketPrioritaet(int ticketPriorität) {
+		this.ticketPrioritaet = ticketPriorität;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ticket")

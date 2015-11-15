@@ -57,7 +57,7 @@ public class ModifyTicket extends HttpServlet {
 		Ticket ticket = em.find(Ticket.class, new TicketId(projectCode, ticketId));
 		ticket.setStatusTyp(ticketStatus);
 		ticket.setUserByTicketIssuer(ticketIssuer);
-		ticket.setTicketPriorität(ticketPriority);
+		ticket.setTicketPrioritaet(ticketPriority);
 		em.getTransaction().commit();
 
 		EntityManagerFactoryUtil.refreshProjectList(request.getServletContext());		
